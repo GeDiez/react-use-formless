@@ -1,22 +1,97 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import { useState } from 'react'
 
-import styles from './styles.css'
+export const useFormless = ({ initialValues }, { validate = () => true }) => {
+  const [values, setValues] = useState(initialValues || {})
+  const [errors, setErrors] = useState({})
+  const [touched, setTouched] = useState({})
+  const [isValid, setValid] = useState(false)
 
-export default class ExampleComponent extends Component {
-  static propTypes = {
-    text: PropTypes.string
+  const setError = (name) => {
+    if (typeof (validate) !== 'function') {
+      throw Error('validate option should be a function')
+    }
+    const error = validate({ values })[name]
+
+    setErrors({ ...errors, [name]: error })
   }
 
-  render() {
-    const {
-      text
-    } = this.props
+  const setValue = (name, value) => {
+    setValues({
+      ...values,
+      [name]: value
+    })
+  }
 
-    return (
-      <div className={styles.test}>
-        Example Component: {text}
-      </div>
-    )
+  const touchValue = (name) => {
+    setError(name)
+    setTouched({ ...touched, [name]: true })
+  }
+
+  const reset = () => {
+    setTouched({})
+    setErrors({})
+    setValues(initialValues)
+    setValid(false)
+  }
+
+  const setAllValues = (values) => {
+    setValuesAsTouched()
+    setValues(values)
+    validateValues(values)
+  }
+
+  const validateValues = (values) => {
+    const fullErrors = validate({ values })
+    const isValid = Object.keys(fullErrors).every(name => fullErrors[name] === '')
+
+    setErrors(fullErrors)
+    setValuesAsTouched()
+    setValid(isValid)
+
+    return isValid
+  }
+
+  // DOM props
+  const submitProps = ({onSuccess, onError}) => ({
+    onSubmit: (ev) => {
+      const isValid = validateValues(values)
+      if (!isValid) {
+        ev.preventDefault()
+        onError()
+      } else {
+        onSuccess()
+      }
+    }
+  })
+
+  const inputFieldProps = (name) => ({
+    name,
+    value: values[name],
+    onInput: ({target: { value }}) =>
+      setValue(name, value),
+    onBlur: () => touchValue(name)
+  })
+
+  // Privated Functions
+
+  const setValuesAsTouched = () => {
+    setTouched(Object.keys(values).reduce((acc, name) => ({...acc, [name]: true}), {}))
+  }
+
+  return {
+    // Variables
+    values,
+    touched,
+    errors,
+    reset,
+    isValid,
+    // Actions
+    setAllValues,
+    setValue,
+    touchValue,
+    validateValues,
+    // DOM props
+    submitProps,
+    inputFieldProps
   }
 }

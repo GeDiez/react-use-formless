@@ -1,18 +1,8 @@
-# UseFormless
-
-Formless is a simple library than allow you have form controlled using react-hooks
-
-## Getting Started
-
-Take at glance!
-
-`We are using Bloomer and bulma for this example`
-```
-import React, { useState } from 'react';
-import { Field, Input, Label, Control, Select, TextArea, Checkbox, Radio, Button, Help, Notification, Delete } from "bloomer";
+import React, { useState, Fragment } from 'react';
+import { Title, Field, Input, Label, Control, Select, TextArea, Checkbox, Radio, Button, Help, Notification, Delete } from "bloomer";
 import joinString from "classnames";
 
-import { useForm } from "../Hooks";
+import { useFormless } from "react-useformless";
 
 export const FormExample = ({isHidden}) => {
   const FIELD_REQUIRED = 'This field is required';
@@ -27,7 +17,7 @@ export const FormExample = ({isHidden}) => {
     checkbox: !values.checkbox ? SELECT_FIELD : '',
   });
 
-  const { values, errors, touched, setValue, touchValue, isValid, reset, setAllValues, submitProps, inputFieldProps } = useForm({
+  const { values, errors, touched, setValue, touchValue, isValid, reset, setAllValues, submitProps, inputFieldProps } = useFormless({
     initialValues: {
       name: '',
       email: 'juan@amezQA',
@@ -62,13 +52,14 @@ export const FormExample = ({isHidden}) => {
     joinString({ [errors[name]]: errors[name] && touched[name] });
 
   return (
-    <>
+    <Fragment>
       <Notification isHidden={!showNotification} isColor={joinString({ success: isValid, danger: !isValid })}>
         <Delete onClick={() => toggleNotification(false)} />
         {isValid ? NOTIFICATION_MESSAGE_SUCCESS : NOTIFICATION_MESSAGE_FAILED}
       </Notification>
       <TextArea rows={10} className={joinString({'is-hidden': isHidden})} value={JSON.stringify({ values, touched, errors }, null, 2)}>
       </TextArea>
+      <Title isHidden={!showNotification} isSize={1}>Form example</Title>
       <form action="" {...submitProps({onSuccess, onError})} className={joinString({'is-hidden': isHidden})}>
         <Field>
           <Label>Name</Label>
@@ -194,42 +185,6 @@ export const FormExample = ({isHidden}) => {
           </Control>
         </Field>
       </form>
-    </>
+    </Fragment>
   );
 };
-
-```
-
-### Prerequisites
-
-This version of formless is based over "16.7.0-alpha.0", you can use and test but dont use in production enviroments since react-hook are a proposal
-
-### Installing
-
-how to install... (yarn | npm)
-
-## Running the tests
-
-use jest for unit tests
-
-## Built With
-
-* [react16.7](https://reactjs.org/docs/hooks-intro.html) - The web framework used
-* [create-react-app](https://reactjs.org/)
-* [yarn](https://yarnpkg.com/en/) - Management of dependecies
-
-## Contributing
-
-Please read [CONTRIBUTING.md]() for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Authors
-
-* **Gibran Lopez** [gediez](https://gist.github.com/GeDiez)
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Similars libraries formik and redux-form
