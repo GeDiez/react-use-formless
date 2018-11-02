@@ -1,13 +1,21 @@
 {
   "name": "react-useformless",
-  "version": "1.0.0",
-  "description": "A library to use controlled forms into react apps",
+  "version": "0.0.1-alpha",
+  "description": "A library to use controlled forms into react apps, Experimental",
   "author": "gediez",
   "license": "MIT",
+  "homepage": "https://gediez.github.io/react-use-formless",
   "repository": "GeDiez/react-use-formless",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
+  "keywords": [
+    "react",
+    "hooks",
+    "form",
+    "react-hooks",
+    "formless"
+  ],
   "engines": {
     "node": ">=8",
     "npm": ">=5"
@@ -47,6 +55,7 @@
     "react": "16.7.0-alpha.0",
     "react-dom": "16.7.0-alpha.0",
     "react-scripts": "2.1.0",
+    "react-testing-library": "^5.2.3",
     "rollup": "^0.64.1",
     "rollup-plugin-babel": "^3.0.7",
     "rollup-plugin-commonjs": "^9.1.3",
