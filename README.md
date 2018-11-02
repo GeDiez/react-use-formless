@@ -7,7 +7,7 @@ Formless is a simple library than allow you have form controlled using react-hoo
 Take at glance!
 
 `We are using Bloomer and bulma for this example`
-```
+```JS
 import React, { useState } from 'react';
 import { Field, Input, Label, Control, Select, TextArea, Checkbox, Radio, Button, Help, Notification, Delete } from "bloomer";
 import joinString from "classnames";
