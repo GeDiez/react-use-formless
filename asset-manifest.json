@@ -1,13 +1,13 @@
 {
-  "main.js": "%20López%20Morales.github.io/react-useformless/static/js/main.c17c1697.chunk.js",
-  "main.js.map": "%20López%20Morales.github.io/react-useformless/static/js/main.c17c1697.chunk.js.map",
-  "static/css/1.97b04500.chunk.css": "%20López%20Morales.github.io/react-useformless/static/css/1.97b04500.chunk.css",
-  "static/js/1.fe1ccd56.chunk.js": "%20López%20Morales.github.io/react-useformless/static/js/1.fe1ccd56.chunk.js",
-  "static/js/1.fe1ccd56.chunk.js.map": "%20López%20Morales.github.io/react-useformless/static/js/1.fe1ccd56.chunk.js.map",
-  "runtime~main.js": "%20López%20Morales.github.io/react-useformless/static/js/runtime~main.b09248b6.js",
-  "runtime~main.js.map": "%20López%20Morales.github.io/react-useformless/static/js/runtime~main.b09248b6.js.map",
-  "static/css/1.97b04500.chunk.css.map": "%20López%20Morales.github.io/react-useformless/static/css/1.97b04500.chunk.css.map",
-  "index.html": "%20López%20Morales.github.io/react-useformless/index.html",
-  "precache-manifest.9f0133ce96601f62d0d4b6959615f757.js": "%20López%20Morales.github.io/react-useformless/precache-manifest.9f0133ce96601f62d0d4b6959615f757.js",
-  "service-worker.js": "%20López%20Morales.github.io/react-useformless/service-worker.js"
+  "main.js": "/react-use-formless/static/js/main.15eaf6fa.chunk.js",
+  "main.js.map": "/react-use-formless/static/js/main.15eaf6fa.chunk.js.map",
+  "static/css/1.97b04500.chunk.css": "/react-use-formless/static/css/1.97b04500.chunk.css",
+  "static/js/1.fe1ccd56.chunk.js": "/react-use-formless/static/js/1.fe1ccd56.chunk.js",
+  "static/js/1.fe1ccd56.chunk.js.map": "/react-use-formless/static/js/1.fe1ccd56.chunk.js.map",
+  "runtime~main.js": "/react-use-formless/static/js/runtime~main.d9bae3f2.js",
+  "runtime~main.js.map": "/react-use-formless/static/js/runtime~main.d9bae3f2.js.map",
+  "static/css/1.97b04500.chunk.css.map": "/react-use-formless/static/css/1.97b04500.chunk.css.map",
+  "index.html": "/react-use-formless/index.html",
+  "precache-manifest.9d422f95db3a7f2571eef2a3a345cee4.js": "/react-use-formless/precache-manifest.9d422f95db3a7f2571eef2a3a345cee4.js",
+  "service-worker.js": "/react-use-formless/service-worker.js"
 }

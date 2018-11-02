@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "%20López%20Morales.github.io/react-useformless/precache-manifest.9f0133ce96601f62d0d4b6959615f757.js"
+  "/react-use-formless/precache-manifest.9d422f95db3a7f2571eef2a3a345cee4.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("%20López%20Morales.github.io/react-useformless/index.html", {
+workbox.routing.registerNavigationRoute("/react-use-formless/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
