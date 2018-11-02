@@ -1,28 +1,45 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+import 'bulma';
+import { Container, Nav, NavLeft, NavItem, NavRight, Button, Columns, Column, Menu, MenuList, MenuLabel, MenuLink, Section } from "bloomer";
+
+import { FormExample } from './FormExample';
+
+const App = () => {
+  const [view, changeViewTo] = useState('');
+  return (
+    <>
+      <Nav hasShadow>
+        <NavLeft>
+          <NavItem isBrand>React Hooks Training</NavItem>
+        </NavLeft>
+        <NavRight isMenu>
+          <NavItem>
+            <Button isColor="success">
+              Go to home
+            </Button>
+          </NavItem>
+        </NavRight>
+      </Nav>
+      <Section>
+        <Container isFluid>
+          <Columns>
+            <Column isSize="1/4">
+              <Menu>
+                <MenuLabel>Custom hooks</MenuLabel>
+                <MenuList>
+                  <li><MenuLink hasTextColor="grey-light" onClick={() => changeViewTo('Register')}>useForm</MenuLink></li>
+                </MenuList>
+              </Menu>
+            </Column>
+            <Column isSize='3/4'>
+              <FormExample isHidden={view !== 'Register'}/>
+            </Column>
+          </Columns>
+        </Container>
+      </Section>
+    </>
+  );
 }
 
 export default App;
