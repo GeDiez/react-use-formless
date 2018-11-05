@@ -1,6 +1,6 @@
 # UseFormless
 
-Formless is a simple library than allow you get form controlled using react-hooks ![logo](/logo.png)
+Formless is a simple library that allow you get controlled form's using react-hooks ![logo](/logo.png)
 
 # Installing
 
@@ -12,10 +12,10 @@ how to install... (yarn | npm)
 
 # Getting Started
 
-Get a formulary in React had been ever so easy! Try it!
+Using a form have never been so easy! Try it!
 
 ## Step 1
-First it's necessary [install](#Installing) react-useFormless from npm or yarn, then import it.
+First it's necessary to [install](#Installing) react-useFormless using npm or yarn then import it.
 
 ```js
 import { useFormeless } from 'react-useFormless';
@@ -53,7 +53,7 @@ useFormless hook receives two params:
 ```
 ## Step 3 Use it
 
-Finally we create our custom hook with useFormless and render it, easy not? 🧘‍🧘  ‍
+Create an instance of useFormless and render it, easy, isn't it? 🧘‍🧘  ‍
 
 ``` js
 // Validate name is a function than receives and object with values and must return and object like follow
@@ -63,11 +63,11 @@ const validate = ({ values }) => ({
   username: validateUsername(),
   email: validateEmail(),
   //... more validations
-});
+});ran
 
 const { values, errors, inputProps, onSubmit } = useFormeless({ initialValues }, { validate, onSuccess, onError });
 ```
-finally use it in you component, for intance, we create this component that allow you see the values, error and touched values
+Finally use it in your Form Component, for instance, we create this component that allow you to see the values, errors and touched values
 
 ``` html
 return(
@@ -104,11 +104,11 @@ return(
 
 # Prerequisites
 
-This version of formless is based over "16.7.0-alpha.0", you can use and test but dont use in production enviroments since react-hook are a proposal
+This version of formless is based over "16.7.0-alpha.0", you can use it and test it but you must not use it in production environments since react-hook are a proposal
 
 # API
 
-useFormless provides some methods in order to add to your Component.
+useFormless provides you some methods so you can add them to your Component.
 
 >Notice: use react-hooks into functional components.
 
@@ -116,7 +116,7 @@ Objects returned
 
 | Name              | Description                                                           |
 | ----------------- | --------------------------------------------------------------------- |
-| values: `Object`  | an Object `{}` contains all values using the key as name, see example |
+| values: `Object`  | an Object `{}` contains all values using the key as name, see example above |
 | errors: `Object`  | an Object `{}` contains all errors using the key as name              |
 | touched: `Object` | an Object `{}` contains all values have been touched/modified         |
 
