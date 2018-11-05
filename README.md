@@ -1,41 +1,76 @@
 # UseFormless
 
-Formless is a simple library than allow you get form controlled using react-hooks 🧩 🧩 🧩 🧩
+Formless is a simple library than allow you get form controlled using react-hooks ![logo](/logo.png)
 
-## Getting Started
+# Installing
 
-get start with a simple formulary.
-### Step 1
-first you need [install](#Installing) it
-### Step2
-useFormless receive two params in order to make easier
-1. The initial state, so far only receive initial values inside a object like follow
-``` json
+how to install... (yarn | npm)
+
+` yarn add react-useFormless `
+
+` npm install react-useFormless `
+
+# Getting Started
+
+Get a formulary in React had been ever so easy! Try it!
+
+## Step 1
+First it's necessary [install](#Installing) react-useFormless from npm or yarn, then import it.
+
+```js
+import { useFormeless } from 'react-useFormless';
+```
+
+## Step2
+useFormless hook receives two params:
+
+1. The initial state, so far this hook only receives initialValues as follow;
+``` js
 {
   initialValues: {
     name: 'Juan Amezcua',
     email: 'juan@email.com',
-    ...others values
+    // ...others values
   }
 }
 ```
-2. options; you can provide this hook with some util functions
-```json
-{
-  validate: () => {
-    // this must return and object
-  },
-  onError: (ev) => {
-    // if you decide using onSubmit function provided by formless, this function is fired after submit error
-    // also it receives the event of submit as param
-  },
-  onSuccess: () => {
-    //same as error function but it is fired on success submit form
-  }
 
+2. options? you can validate in just one Object and anymore also handle
+```js
+{
+  validate: ({ values }) => {
+    // this must return an Object, it must contain `name: 'string with error or empty string or null'`
+    email: validateName(values.email): string
+  },
+  onError: (ev: DOMEvent) => {
+    // if you decide using onSubmit function provided by formless, this function is fired after submit error
+    // It receives DOMevent so you do whatever you want after
+  },
+  onSuccess: (ev: DOMEvent) => {
+    //same as error option but it is fired on success
+  }
 }
 ```
+## Step 3 Use it
+
+Finally we create our custom hook with useFormless and render it, easy not? 🧘‍🧘  ‍
+
+``` js
+// Validate name is a function than receives and object with values and must return and object like follow
+// Notice: validateName, validateUsername and validateEmail functions must return a string
+const validate = ({ values }) => ({
+  name: validateName(),
+  username: validateUsername(),
+  email: validateEmail(),
+  //... more validations
+});
+
+const { values, errors, inputProps, onSubmit } = useFormeless({ initialValues }, { validate, onSuccess, onError });
+```
+finally use it in you component, for intance, we create this component that allow you see the values, error and touched values
+
 ``` html
+return(
   <section>
     {notification && (
       <div>
@@ -61,44 +96,70 @@ useFormless receive two params in order to make easier
       <h2>errors</h2>
       {JSON.stringify(errors, null, '\t')}
     </article>
-    </section>
+  </section>
+)
 ```
 
-### Prerequisites
+> if you prefer it, get started with this snippet in [CodeSandbox](https://codesandbox.io/s/m7z683235j)
+
+# Prerequisites
 
 This version of formless is based over "16.7.0-alpha.0", you can use and test but dont use in production enviroments since react-hook are a proposal
 
-### Installing
+# API
 
-how to install... (yarn | npm)
+useFormless provides some methods in order to add to your Component.
 
-` npm install react-formless `
+>Notice: use react-hooks into functional components.
 
-` yarn add react-formless `
+Objects returned
 
+| Name              | Description                                                           |
+| ----------------- | --------------------------------------------------------------------- |
+| values: `Object`  | an Object `{}` contains all values using the key as name, see example |
+| errors: `Object`  | an Object `{}` contains all errors using the key as name              |
+| touched: `Object` | an Object `{}` contains all values have been touched/modified         |
 
-## Running the tests
+Function for handle values
 
-use jest for unit tests
+| Function                                  | Description                                                 |
+| ----------------------------------------- | ----------------------------------------------------------- |
+| setValue(name: string, value: any) : void | set a value and validates if it has errors                  |
+| touchValue(name): void                    | mark the value passed as touched                            |
+| reset(): void                             | set all values as initialValues Object                      |
+| setAllValues({}: values): void            | set all values with the new object of values passed         |
+| validateValues(): boolean                 | Run validations, set errors and mark all objects as touched |
 
-## Built With
+Functions for DOM interface
 
-* [react16.7](https://reactjs.org/docs/hooks-intro.html) - The web framework used
-* [create-react-app](https://reactjs.org/)
+When we created useFormless, we think about separate logic and DOM logic since this is more resuable.
+we define 2 method in order to handle inputs and form interface directly.
+
+| Function                         | Description |
+| -------------------------------- | ----------- |
+| inputProps(name: String): Object | This funtion will return custom props `{name, value, onChange, onBlur}`, pass this object to your input component direclty, [see example](#Examples) |
+| onSubmit(event: DOMEvent): void  | Handle submit event, this will trigger either onSuccess or onError functions|
+
+### Examples
+
+```<input id="my-input" type="text" {...inputProps('email')}>```
+
+```<form id="my-form" onSubmit={onSubmit}>```
+
+# Running the tests
+
+In order to run test use `jest` and `react-testing-library`
+
+# Built With
+
+* [react16.7-alpha.0](https://reactjs.org/docs/hooks-intro.html) - The web framework used
 * [yarn](https://yarnpkg.com/en/) - Management of dependecies
 
-## Contributing
-
-Please read [CONTRIBUTING.md]() for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Authors
+# Authors
 
 * **Gibran Lopez** [gediez](https://gist.github.com/GeDiez)
 
-## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+# Acknowledgments
 
-## Acknowledgments
-
-* Similars libraries formik and redux-form
+* Similars libraries; formik and redux-form

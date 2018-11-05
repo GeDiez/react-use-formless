@@ -1,235 +1,165 @@
 # UseFormless
 
-Formless is a simple library than allow you have form controlled using react-hooks
+Formless is a simple library than allow you get form controlled using react-hooks ![logo](/logo.png)
 
-## Getting Started
-
-Take at glance!
-
-`We are using Bloomer and bulma for this example`
-```
-import React, { useState } from 'react';
-import { Field, Input, Label, Control, Select, TextArea, Checkbox, Radio, Button, Help, Notification, Delete } from "bloomer";
-import joinString from "classnames";
-
-import { useForm } from "../Hooks";
-
-export const FormExample = ({isHidden}) => {
-  const FIELD_REQUIRED = 'This field is required';
-  const SELECT_FIELD = 'Please select this field';
-  const NOTIFICATION_MESSAGE_SUCCESS = 'Success message here!';
-  const NOTIFICATION_MESSAGE_FAILED = 'Validations form has failed, please check the fields again!';
-  const validate = ({ values }) => ({
-    name: values.name === '' ? FIELD_REQUIRED : '',
-    email: values.email  === '' ? FIELD_REQUIRED : '',
-    username: values.username === '' ? FIELD_REQUIRED : '',
-    select: values.select === '' ? FIELD_REQUIRED : '',
-    checkbox: !values.checkbox ? SELECT_FIELD : '',
-  });
-
-  const { values, errors, touched, setValue, touchValue, isValid, reset, setAllValues, submitProps, inputFieldProps } = useForm({
-    initialValues: {
-      name: '',
-      email: 'juan@amezQA',
-      checkbox: false,
-      select: '',
-      radioButton: 'yes'
-    }
-  }, { validate });
-
-  const [showNotification, toggleNotification] = useState(false);
-
-  const onSuccess = () => {
-    toggleNotification(true);
-  }
-
-  const onError = () => {
-    toggleNotification(true);
-  }
-
-  const handleInput = ({target: { name, value }}) => {
-    setValue(name, value);
-    toggleNotification(false);
-  }
-
-  const setColorToInput = name =>
-    joinString({
-      success: errors[name] === '',
-      danger: errors[name] && touched[name],
-    });
-
-  const getErrorMessageToInput = name =>
-    joinString({ [errors[name]]: errors[name] && touched[name] });
-
-  return (
-    <>
-      <Notification isHidden={!showNotification} isColor={joinString({ success: isValid, danger: !isValid })}>
-        <Delete onClick={() => toggleNotification(false)} />
-        {isValid ? NOTIFICATION_MESSAGE_SUCCESS : NOTIFICATION_MESSAGE_FAILED}
-      </Notification>
-      <TextArea rows={10} className={joinString({'is-hidden': isHidden})} value={JSON.stringify({ values, touched, errors }, null, 2)}>
-      </TextArea>
-      <form action="" {...submitProps({onSuccess, onError})} className={joinString({'is-hidden': isHidden})}>
-        <Field>
-          <Label>Name</Label>
-          <Control>
-            <Input
-              isColor={setColorToInput('name')}
-              type="text"
-              placeholder='Your name'
-              value={values.name}
-              name='name'
-              onInput={handleInput}
-              onBlur={() => touchValue('name')}
-              />
-          </Control>
-          <Help isColor='danger'>{getErrorMessageToInput('name')}</Help>
-        </Field>
-
-        <Field>
-          <Label>Username</Label>
-          <Control>
-            <Input
-              isColor={setColorToInput('username')}
-              type="text"
-              placeholder='Your username'
-              {...inputFieldProps('username')}
-              />
-          </Control>
-          <Help isColor='danger'>{getErrorMessageToInput('username')}</Help>
-        </Field>
-
-        <Field>
-          <Label>Email</Label>
-          <Control>
-            <Input
-              isColor={setColorToInput('email')}
-              placeholder='You email'
-              value={values.email}
-              name='email'
-              onInput={handleInput}
-              onBlur={() => touchValue('email')}
-              />
-          </Control>
-          <Help isColor='danger'>{getErrorMessageToInput('email')}</Help>
-        </Field>
-
-        <Field>
-          <Label>Select:</Label>
-          <Control>
-            <Select
-              isColor={setColorToInput('select')}
-              {...inputFieldProps('select')}
-              >
-              <option value=''>Gender</option>
-              <option value='M'>Male</option>
-              <option value='F'>Female</option>
-            </Select>
-          </Control>
-          <Help isColor='danger'>{getErrorMessageToInput('select')}</Help>
-        </Field>
-
-        <Field>
-          <Label>Message</Label>
-          <Control>
-            <TextArea
-              {...inputFieldProps('textArea')}
-              placeholder={'<TextArea />'}
-              />
-          </Control>
-          <Help isColor='danger'>{getErrorMessageToInput('textArea')}</Help>
-        </Field>
-
-        <Field>
-          <Control>
-            <Checkbox
-              onChange={({ target: { name, checked } }) => setValue(name, checked)}
-              checked={values.checkbox}
-              name='checkbox'
-              onBlur={() => touchValue('checkbox')}
-              >
-              I agree
-            </Checkbox>
-          </Control>
-          <Help isColor='danger'>{getErrorMessageToInput('checkbox')}</Help>
-        </Field>
-
-        <Field>
-          <Control>
-            <Radio
-              name="radioButton"
-              value="yes"
-              checked={values.radioButton === 'yes'}
-              onChange={handleInput}
-              onBlur={() => touchValue('radioButton')}
-              >
-              Yes
-            </Radio>
-            <Radio
-              name="radioButton"
-              value="no"
-              checked={values.radioButton === 'no'}
-              onChange={handleInput}
-              onBlur={() => touchValue('radioButton')}
-              >
-              No
-            </Radio>
-          </Control>
-        </Field>
-
-        <Field isGrouped>
-          <Control>
-            <Button isColor='primary' type="submit">Submit</Button>
-          </Control>
-          <Control>
-            <Button isColor='info' onClick={reset}>Reset</Button>
-          </Control>
-          <Control>
-            <Button
-              isColor='link'
-              onClick={() => setAllValues({name: 'default name', email: 'default email', checkbox: true, radioButton: 'no', select: 'M', textArea: 'text area example'})}
-              >
-              set new values
-            </Button>
-          </Control>
-        </Field>
-      </form>
-    </>
-  );
-};
-
-```
-
-### Prerequisites
-
-This version of formless is based over "16.7.0-alpha.0", you can use and test but dont use in production enviroments since react-hook are a proposal
-
-### Installing
+# Installing
 
 how to install... (yarn | npm)
 
-## Running the tests
+` yarn add react-useFormless `
 
-use jest for unit tests
+` npm install react-useFormless `
 
-## Built With
+# Getting Started
 
-* [react16.7](https://reactjs.org/docs/hooks-intro.html) - The web framework used
-* [create-react-app](https://reactjs.org/)
+Get a formulary in React had been ever so easy! Try it!
+
+## Step 1
+First it's necessary [install](#Installing) react-useFormless from npm or yarn, then import it.
+
+```js
+import { useFormeless } from 'react-useFormless';
+```
+
+## Step2
+useFormless hook receives two params:
+
+1. The initial state, so far this hook only receives initialValues as follow;
+``` js
+{
+  initialValues: {
+    name: 'Juan Amezcua',
+    email: 'juan@email.com',
+    // ...others values
+  }
+}
+```
+
+2. options? you can validate in just one Object and anymore also handle
+```js
+{
+  validate: ({ values }) => {
+    // this must return an Object, it must contain `name: 'string with error or empty string or null'`
+    email: validateName(values.email): string
+  },
+  onError: (ev: DOMEvent) => {
+    // if you decide using onSubmit function provided by formless, this function is fired after submit error
+    // It receives DOMevent so you do whatever you want after
+  },
+  onSuccess: (ev: DOMEvent) => {
+    //same as error option but it is fired on success
+  }
+}
+```
+## Step 3 Use it
+
+Finally we create our custom hook with useFormless and render it, easy not? 🧘‍🧘  ‍
+
+``` js
+// Validate name is a function than receives and object with values and must return and object like follow
+// Notice: validateName, validateUsername and validateEmail functions must return a string
+const validate = ({ values }) => ({
+  name: validateName(),
+  username: validateUsername(),
+  email: validateEmail(),
+  //... more validations
+});
+
+const { values, errors, inputProps, onSubmit } = useFormeless({ initialValues }, { validate, onSuccess, onError });
+```
+finally use it in you component, for intance, we create this component that allow you see the values, error and touched values
+
+``` html
+return(
+  <section>
+    {notification && (
+      <div>
+        <h3>{message}</h3>
+        <p style={{color: isValid ? 'green' : 'red'}}>the submit form was {isValid ? 'valid' : 'invalid'}</p>
+      </div>
+    )}
+    <h1>Basic example</h1>
+    <form onSubmit={onSubmit}>
+      <label htmlFor="name">Name</label>
+      <input id="name" type="text" {...inputProps('name')}/>
+      <p style={{color: 'red', fontSize: 9}}>{errors.name}</p>
+      <label htmlFor="email">email</label>
+      <input id="email" type="text" {...inputProps('email')}/>
+      <p style={{color: 'red', fontSize: 9}}>{errors.email}</p>
+      <input type="submit" value="send"/>
+    </form>
+    <article style={{border: '1px lightgrey solid', padding: '14px'}}>
+      <h2>Values</h2>
+      {JSON.stringify(values, null, '\t')}
+      <h2>Touched</h2>
+      {JSON.stringify(touched, null, '\t')}
+      <h2>errors</h2>
+      {JSON.stringify(errors, null, '\t')}
+    </article>
+  </section>
+)
+```
+
+> if you prefer it, get started with this snippet in [CodeSandbox](https://codesandbox.io/s/m7z683235j)
+
+# Prerequisites
+
+This version of formless is based over "16.7.0-alpha.0", you can use and test but dont use in production enviroments since react-hook are a proposal
+
+# API
+
+useFormless provides some methods in order to add to your Component.
+
+>Notice: use react-hooks into functional components.
+
+Objects returned
+
+| Name              | Description                                                           |
+| ----------------- | --------------------------------------------------------------------- |
+| values: `Object`  | an Object `{}` contains all values using the key as name, see example |
+| errors: `Object`  | an Object `{}` contains all errors using the key as name              |
+| touched: `Object` | an Object `{}` contains all values have been touched/modified         |
+
+Function for handle values
+
+| Function                                  | Description                                                 |
+| ----------------------------------------- | ----------------------------------------------------------- |
+| setValue(name: string, value: any) : void | set a value and validates if it has errors                  |
+| touchValue(name): void                    | mark the value passed as touched                            |
+| reset(): void                             | set all values as initialValues Object                      |
+| setAllValues({}: values): void            | set all values with the new object of values passed         |
+| validateValues(): boolean                 | Run validations, set errors and mark all objects as touched |
+
+Functions for DOM interface
+
+When we created useFormless, we think about separate logic and DOM logic since this is more resuable.
+we define 2 method in order to handle inputs and form interface directly.
+
+| Function                         | Description |
+| -------------------------------- | ----------- |
+| inputProps(name: String): Object | This funtion will return custom props `{name, value, onChange, onBlur}`, pass this object to your input component direclty, [see example](#Examples) |
+| onSubmit(event: DOMEvent): void  | Handle submit event, this will trigger either onSuccess or onError functions|
+
+### Examples
+
+```<input id="my-input" type="text" {...inputProps('email')}>```
+
+```<form id="my-form" onSubmit={onSubmit}>```
+
+# Running the tests
+
+In order to run test use `jest` and `react-testing-library`
+
+# Built With
+
+* [react16.7-alpha.0](https://reactjs.org/docs/hooks-intro.html) - The web framework used
 * [yarn](https://yarnpkg.com/en/) - Management of dependecies
 
-## Contributing
-
-Please read [CONTRIBUTING.md]() for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Authors
+# Authors
 
 * **Gibran Lopez** [gediez](https://gist.github.com/GeDiez)
 
-## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+# Acknowledgments
 
-## Acknowledgments
-
-* Similars libraries formik and redux-form
+* Similars libraries; formik and redux-form

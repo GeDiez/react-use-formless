@@ -118,10 +118,10 @@ export const useFormless = (
     values,
     touched,
     errors,
-    reset,
     isValid,
     // Actions
     setAllValues,
+    reset,
     setValue,
     touchValue,
     validateValues,
