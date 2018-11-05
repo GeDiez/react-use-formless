@@ -26,12 +26,14 @@ export const _isValid = ({ errors }) => {
 
 // DOM interface logic
 
-export const _onSubmit = ({ validate, values, onError, onSuccess }) => {
+export const _onSubmit = ({ validate, values, onError, onSuccess }) => (ev) => {
   const isValid = validate(values)
   if (!isValid) {
-    onError()
+    console.log('1212')
+    onError(ev)
   } else {
-    onSuccess()
+    console.log('45645')
+    onSuccess(ev)
   }
 }
 
@@ -103,7 +105,7 @@ export const useFormless = (
 
   // DOM props
 
-  const onSubmit = (ev) => _onSubmit({ values, validate: validateValues, onSuccess: () => onSuccess(ev), onError: () => onError(ev) })
+  const onSubmit = _onSubmit({ values, validate: validateValues, onSuccess, onError })
 
   const inputProps = _inputProps({ values, setValue, touchValue })
 
@@ -118,10 +120,10 @@ export const useFormless = (
     values,
     touched,
     errors,
-    reset,
     isValid,
     // Actions
     setAllValues,
+    reset,
     setValue,
     touchValue,
     validateValues,
