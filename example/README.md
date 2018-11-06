@@ -1,6 +1,6 @@
 # UseFormless
 
-Formless is a simple library that allow you get controlled form's using react-hooks ![logo](/logo.png)
+Formless is a simple library that allows you to control forms with react-hooks ![logo](/logo.png)
 
 # Installing
 
@@ -12,10 +12,10 @@ how to install... (yarn | npm)
 
 # Getting Started
 
-Using a form have never been so easy! Try it!
+Using a form has never been so easy! Try it!
 
 ## Step 1
-First it's necessary to [install](#Installing) react-useFormless using npm or yarn then import it.
+First it's necessary to [install](#Installing) react-useFormless via npm or yarn and then import it.
 
 ```js
 import { useFormeless } from 'react-useFormless';
@@ -24,7 +24,7 @@ import { useFormeless } from 'react-useFormless';
 ## Step2
 useFormless hook receives two params:
 
-1. The initial state, so far this hook only receives initialValues as follow;
+1. **The initial state** so far this hook only receives initialValues as follow;
 ``` js
 {
   initialValues: {
@@ -35,7 +35,7 @@ useFormless hook receives two params:
 }
 ```
 
-2. options? you can validate in just one Object and anymore also handle
+2. **options(optional)** you can validate in just one Object and also add handlers for success or error
 ```js
 {
   validate: ({ values }) => {
@@ -56,7 +56,7 @@ useFormless hook receives two params:
 Create an instance of useFormless and render it, easy, isn't it? 🧘‍🧘  ‍
 
 ``` js
-// Validate name is a function than receives and object with values and must return and object like follow
+// Validate name is a function that receives an Object with values and must return an object that looks like the following:
 // Notice: validateName, validateUsername and validateEmail functions must return a string
 const validate = ({ values }) => ({
   name: validateName(),
@@ -67,7 +67,7 @@ const validate = ({ values }) => ({
 
 const { values, errors, inputProps, onSubmit } = useFormeless({ initialValues }, { validate, onSuccess, onError });
 ```
-Finally use it in your Form Component, for instance, we create this component that allow you to see the values, errors and touched values
+Finally use it in your Form Component: for instance, we created this component that allow you to see the values, errors and touched values
 
 ``` html
 return(
@@ -104,7 +104,7 @@ return(
 
 # Prerequisites
 
-This version of formless is based over "16.7.0-alpha.0", you can use it and test it but you must not use it in production environments since react-hook are a proposal
+This version of formless is based in "16.7.0-alpha.0", you can use it and test it but you must not use it in production environments because react-hooks are still a proposal
 
 # API
 
@@ -116,7 +116,7 @@ Objects returned
 
 | Name              | Description                                                           |
 | ----------------- | --------------------------------------------------------------------- |
-| values: `Object`  | an Object `{}` contains all values using the key as name, see example |
+| values: `Object`  | an Object `{}` contains all values using the key as name, see example above |
 | errors: `Object`  | an Object `{}` contains all errors using the key as name              |
 | touched: `Object` | an Object `{}` contains all values have been touched/modified         |
 
@@ -132,12 +132,12 @@ Function for handle values
 
 Functions for DOM interface
 
-When we created useFormless, we think about separate logic and DOM logic since this is more resuable.
+When we created useFormless, we thought about separating logic and DOM logic, because it is more resuable.
 we define 2 method in order to handle inputs and form interface directly.
 
 | Function                         | Description |
 | -------------------------------- | ----------- |
-| inputProps(name: String): Object | This funtion will return custom props `{name, value, onChange, onBlur}`, pass this object to your input component direclty, [see example](#Examples) |
+| inputProps(name: String): Object | This funtion will return custom props `{name, value, onChange, onBlur}`, pass this object to your input component directly, [see example](#Examples) |
 | onSubmit(event: DOMEvent): void  | Handle submit event, this will trigger either onSuccess or onError functions|
 
 ### Examples
@@ -148,12 +148,12 @@ we define 2 method in order to handle inputs and form interface directly.
 
 # Running the tests
 
-In order to run test use `jest` and `react-testing-library`
+In order to run tests use `jest` and `react-testing-library`
 
 # Built With
 
 * [react16.7-alpha.0](https://reactjs.org/docs/hooks-intro.html) - The web framework used
-* [yarn](https://yarnpkg.com/en/) - Management of dependecies
+* [yarn](https://yarnpkg.com/en/) - For dependencies management
 
 # Authors
 
@@ -162,4 +162,4 @@ In order to run test use `jest` and `react-testing-library`
 
 # Acknowledgments
 
-* Similars libraries; formik and redux-form
+* Similar libraries; formik and redux-form
