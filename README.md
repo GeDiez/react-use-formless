@@ -24,7 +24,7 @@ import { useFormeless } from 'react-useFormless';
 ## Step2
 useFormless hook receives two params:
 
-1. The initial state, so far this hook only receives initialValues as follow;
+1. **The initial state** so far this hook only receives initialValues as follow;
 ``` js
 {
   initialValues: {
@@ -35,7 +35,7 @@ useFormless hook receives two params:
 }
 ```
 
-2. options? you can validate in just one Object and anymore also handle
+2. **options(optional)** you can validate in just one Object and anymore also handle
 ```js
 {
   validate: ({ values }) => {

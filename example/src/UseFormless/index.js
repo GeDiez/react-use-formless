@@ -29,10 +29,8 @@ export const _isValid = ({ errors }) => {
 export const _onSubmit = ({ validate, values, onError, onSuccess }) => (ev) => {
   const isValid = validate(values)
   if (!isValid) {
-    console.log('1212')
     onError(ev)
   } else {
-    console.log('45645')
     onSuccess(ev)
   }
 }
