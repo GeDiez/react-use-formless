@@ -1,24 +1,24 @@
-# UseFormless
+# useFormless
 
-Formless is a simple library that allows you to control forms with react-hooks ![logo](/logo.png)
+react-useformless is a simple library that allows you to control forms with react-hooks ![logo](/logo.png)
 
 # Installing
 
 how to install... (yarn | npm)
 
-` yarn add react-useFormless `
+` yarn add react-useformless `
 
-` npm install react-useFormless `
+` npm install react-useformless `
 
 # Getting Started
 
 Using a form has never been so easy! Try it!
 
 ## Step 1
-First it's necessary to [install](#Installing) react-useFormless via npm or yarn and then import it.
+First it's necessary to [install](#Installing) react-useformless via npm or yarn and then import it.
 
 ```js
-import { useFormeless } from 'react-useFormless';
+import { useFormless } from 'react-useformless';
 ```
 
 ## Step2
@@ -158,7 +158,6 @@ In order to run tests use `jest` and `react-testing-library`
 # Authors
 
 * **Gibran Lopez** [gediez](https://gist.github.com/GeDiez)
-
 
 # Acknowledgments
 
