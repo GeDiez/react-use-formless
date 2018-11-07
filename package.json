@@ -13,8 +13,10 @@
     "react",
     "hooks",
     "form",
+    "state form",
     "react-hooks",
-    "formless"
+    "formless",
+    "useformless"
   ],
   "engines": {
     "node": ">=8",

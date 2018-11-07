@@ -3,7 +3,7 @@ import { _setError, _setValue, _setTouched, _touchAllValues, _onSubmit, _inputPr
 
 // Implementation useFormeless hook
 
-export const useFormless = (
+const useFormless = (
   { initialValues },
   {
     validate = () => ({}),
@@ -86,3 +86,5 @@ export const useFormless = (
     inputProps
   }
 }
+
+export default useFormless

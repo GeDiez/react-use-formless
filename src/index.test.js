@@ -1,7 +1,8 @@
 import React from 'react'
 import { render } from 'react-testing-library'
 
-import { useFormless, _setError, _setValue, _setTouched, _touchAllValues, _isValid, _onSubmit, _inputProps } from './index'
+import useFormless from './index'
+import { _setError, _setValue, _setTouched, _touchAllValues, _isValid, _onSubmit, _inputProps } from './reducers'
 
 describe('useFormless hook', () => {
   // Define variables

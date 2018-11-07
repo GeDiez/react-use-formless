@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { useFormless } from "../UseFormless";
+import useFormless from "../UseFormless";
 
 export const FormExample = () => {
   const validate = ({ values }) => ({
