@@ -1,9 +1,15 @@
+<h1 align="center">
+  <img src="/example/public/logo-useformless.png" alt="logo" />
+</h1>
+
 # useFormless
 
-> react-useformless is a simple library that allows you to control forms with react-hooks ![logo](/logo-useformless.png)
+> react-useformless is a simple library that allows you to control forms with react-hooks
 
 [![Build Status](https://travis-ci.org/GeDiez/react-use-formless.svg?branch=master)](https://travis-ci.org/GeDiez/react-use-formless)
 [![styled with standard](https://img.shields.io/badge/styled_with-standard-ff69b4.svg)](https://github.com/standard/standard)
+
+[![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
 # Installing
 
