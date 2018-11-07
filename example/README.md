@@ -4,12 +4,12 @@
 
 # useFormless
 
-> react-useformless is a simple library that allows you to control forms with react-hooks
+> react-useformless is a simple library that allows you to control forms with react-hooks approach
 
 [![Build Status](https://travis-ci.org/GeDiez/react-use-formless.svg?branch=master)](https://travis-ci.org/GeDiez/react-use-formless)
 [![styled with standard](https://img.shields.io/badge/styled_with-standard-ff69b4.svg)](https://github.com/standard/standard)
 
-[![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+[![Awesome](https://awesome.re/badge.svg)](https://github.com/rehooks/awesome-react-hooks)
 
 # Installing
 
@@ -51,7 +51,7 @@ useFormless hook receives two params:
 {
   validate: ({ values }) => {
     // this must return an Object, it must contain `name: 'string with error or empty string or null'`
-    email: validateName(values.email) // it will return an string
+    email: validateName(values.email): string
   },
   onError: (ev: DOMEvent) => {
     // if you decide using onSubmit function provided by formless, this function is fired after submit error
@@ -74,7 +74,7 @@ const validate = ({ values }) => ({
   username: validateUsername(),
   email: validateEmail(),
   //... more validations
-});ran
+});
 
 const { values, errors, inputProps, onSubmit } = useFormeless({ initialValues }, { validate, onSuccess, onError });
 ```
@@ -168,7 +168,8 @@ In order to run tests use `jest` and `react-testing-library`
 
 # Authors
 
-* **Gibran Lopez** [gediez](https://gist.github.com/GeDiez)
+* **Gibran Lopez** [gediez](https://github.com/GeDiez)
+* **Crystal Stream** [find on github](https://github.com/CrystalStream)
 
 # Acknowledgments
 

@@ -9,7 +9,7 @@
 [![Build Status](https://travis-ci.org/GeDiez/react-use-formless.svg?branch=master)](https://travis-ci.org/GeDiez/react-use-formless)
 [![styled with standard](https://img.shields.io/badge/styled_with-standard-ff69b4.svg)](https://github.com/standard/standard)
 
-[![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+[![Awesome](https://awesome.re/badge.svg)](https://github.com/rehooks/awesome-react-hooks)
 
 # Installing
 
@@ -74,7 +74,7 @@ const validate = ({ values }) => ({
   username: validateUsername(),
   email: validateEmail(),
   //... more validations
-});ran
+});
 
 const { values, errors, inputProps, onSubmit } = useFormeless({ initialValues }, { validate, onSuccess, onError });
 ```
@@ -168,7 +168,8 @@ In order to run tests use `jest` and `react-testing-library`
 
 # Authors
 
-* **Gibran Lopez** [gediez](https://gist.github.com/GeDiez)
+* **Gibran Lopez** [gediez](https://github.com/GeDiez)
+* **Crystal Stream** [CrystalStream](https://github.com/CrystalStream)
 
 # Acknowledgments
 
