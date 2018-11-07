@@ -1,27 +1,34 @@
 # useFormless
 
-react-useformless is a simple library that allows you to control forms with react-hooks ![logo](/logo.png)
+> react-useformless is a simple library that allows you to control forms with react-hooks approach ![logo](/logo.png)
+
+[![Build Status](https://travis-ci.org/GeDiez/react-use-formless.svg?branch=master)](https://travis-ci.org/GeDiez/react-use-formless)
+[![styled with standard](https://img.shields.io/badge/styled_with-standard-ff69b4.svg)](https://github.com/standard/standard)
+
+[![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
 # Installing
 
-how to install... (yarn | npm)
+how to install
 
-` yarn add react-useformless `
+``` bash
+$> yarn add react-useformless
 
-` npm install react-useformless `
+$> npm install react-useformless
+```
 
 # Getting Started
 
 Using a form has never been so easy! Try it!
 
-## Step 1
-First it's necessary to [install](#Installing) react-useformless via npm or yarn and then import it.
+## Step 1 Import it 📦
 
 ```js
 import { useFormless } from 'react-useformless';
 ```
 
-## Step2
+## Step2 State and Options
+
 useFormless hook receives two params:
 
 1. **The initial state** so far this hook only receives initialValues as follow;
@@ -51,9 +58,9 @@ useFormless hook receives two params:
   }
 }
 ```
-## Step 3 Use it
+## Step 3 Use it 💡
 
-Create an instance of useFormless and render it, easy, isn't it? 🧘‍🧘  ‍
+Create an instance of useFormless and render it, easy, isn't it? 💃🏻
 
 ``` js
 // Validate name is a function that receives an Object with values and must return an object that looks like the following:
@@ -100,11 +107,11 @@ return(
 )
 ```
 
-> if you prefer it, get started with this snippet in [CodeSandbox](https://codesandbox.io/s/m7z683235j)
+> if you prefer it, get started 🎮 with this snippet in [CodeSandbox](https://codesandbox.io/s/m7z683235j)
 
 # Prerequisites
 
-This version of formless is based in "16.7.0-alpha.0", you can use it and test it but you must not use it in production environments because react-hooks are still a proposal
+This version of formless is based in "16.7.0-alpha.0", you can use it and test it but you must not use it in production environments because react-hooks are still a proposal 👩🏻‍🔬 👨🏻‍🔬 ⚗️
 
 # API
 
