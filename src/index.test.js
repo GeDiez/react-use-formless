@@ -19,7 +19,7 @@ describe('useFormless hook', () => {
     hasName: !values.hasName ? 'custom error2' : ''
   }))
 
-  describe('implementate form logic', () => {
+  describe('reducers', () => {
     it('test _setError function', () => {
       const errors1 = _setError({ errors, values, validate, name: 'fullname' })
       const errors2 = _setError({ errors: errors1, values, validate, name: 'hasName' })
@@ -78,7 +78,7 @@ describe('useFormless hook', () => {
     })
   })
 
-  describe('DOM interface functions', () => {
+  describe('reducers to DOM interface', () => {
     it('should set value, onInput, onBlur props for a value in specific and return a function it should receive only name', () => {
       const setValue = jest.fn()
       const setTouched = jest.fn()
@@ -115,7 +115,7 @@ describe('useFormless hook', () => {
     })
   })
 
-  describe('react render formless hook', () => {
+  describe('hook inside a component', () => {
     const Form = () => {
       const { errors, inputFieldProps, formProps } = useFormless({ initialValues: values }, { validate })
       return (
@@ -126,7 +126,7 @@ describe('useFormless hook', () => {
         </form>
       )
     }
-    it('should render without crash', () => {
+    it('should render without crashing', () => {
       const { container } = render(Form)
       expect(container).toBeTruthy()
     })
