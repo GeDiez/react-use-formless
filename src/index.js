@@ -47,7 +47,7 @@ export const _inputProps = ({ values, setValue, touchValue }) => (name) => {
 
 // Implementation useFormeless hook
 
-export const useFormless = (
+const useFormless = (
   { initialValues },
   {
     validate = () => ({}),
@@ -130,3 +130,5 @@ export const useFormless = (
     inputProps
   }
 }
+
+export default useFormless;
