@@ -1,7 +1,7 @@
 {
   "name": "react-useformless",
-  "version": "0.0.3-alpha",
-  "description": "A library to use controlled forms into react apps, Experimental",
+  "version": "0.1.0",
+  "description": "A library to use controlled forms into react apps",
   "author": "gediez",
   "license": "MIT",
   "homepage": "https://gediez.github.io/react-use-formless",
