@@ -31,7 +31,7 @@ Using a form has never been so easy! Try it!
 import { useFormless } from 'react-useformless';
 ```
 
-## Step2 State and Options
+## Step 2 State and Options
 
 useFormless hook receives two params:
 
