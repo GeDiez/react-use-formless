@@ -28,7 +28,7 @@ Using a form has never been so easy! Try it!
 ## Step 1 Import it 📦
 
 ```js
-import { useFormless } from 'react-useformless';
+import useFormless from 'react-useformless';
 ```
 
 ## Step 2 State and Options
