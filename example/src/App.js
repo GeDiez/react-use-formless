@@ -1,5 +1,4 @@
 import React from 'react';
-import 'bulma';
 import { hot } from 'react-hot-loader';
 
 import FormBasic from './form.js';
