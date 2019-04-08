@@ -14,7 +14,7 @@ const createParty = (Dformless, IStore, options) => {
     const newPath = name ? [...path, name] : []
 
     // add validator function to tasker
-    taskerValidations.add(errors => Dformless.validateParty(IStore.values, errors, { path: newPath, validate: options.validate }))
+    taskerValidations.add(errors => Dformless.validateParty(IStore.values, errors, { path: newPath, validate: (name, value) => options.validate(name, value, { values: Dformless.getValuesParty(IStore.values, { path }) }) }))
 
     return ({
       values,
