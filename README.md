@@ -56,10 +56,12 @@ useFormless hook receives:
     return errorFn(value)
   },
   onError: (ev: DOMEvent) => {
+    ev.preventDefault()
     // if you decide using onSubmit function provided by formless, this function is fired after submit error
     // It receives DOMevent so you do whatever you want after it ends
   },
   onSuccess: (ev: DOMEvent) => {
+    ev.preventDefault()
     //same as error option but it is fired on success
   }
 }
@@ -74,30 +76,16 @@ const { values, errors, inputProps, onSubmit } = useFormeless({ initialValues },
 
 return(
   <section>
-    {notification && (
-      <div>
-        <h3>{message}</h3>
-        <p style={{color: isValid ? 'green' : 'red'}}>the submit form was {isValid ? 'valid' : 'invalid'}</p>
-      </div>
-    )}
     <h1>Basic example</h1>
     <form onSubmit={onSubmit}>
       <label htmlFor="name">Name</label>
-      <input id="name" type="text" {...inputProps('name')}/>
+      <input id="name" type="text" {...inputProps('name', 'armando')}/>
       <p style={{color: 'red', fontSize: 9}}>{errors.name}</p>
       <label htmlFor="email">email</label>
-      <input id="email" type="text" {...inputProps('email')}/>
+      <input id="email" type="password" {...inputProps('password')}/>
       <p style={{color: 'red', fontSize: 9}}>{errors.email}</p>
-      <input type="submit" value="send"/>
+      <input type="submit" value="Login"/>
     </form>
-    <article style={{border: '1px lightgrey solid', padding: '14px'}}>
-      <h2>Values</h2>
-      {JSON.stringify(values, null, '\t')}
-      <h2>Touched</h2>
-      {JSON.stringify(touched, null, '\t')}
-      <h2>errors</h2>
-      {JSON.stringify(errors, null, '\t')}
-    </article>
   </section>
 )
 ```
@@ -107,7 +95,7 @@ return(
 # Prerequisites
 
 React hooks already are stables, so what are you waiting for?
-useFormless is now updated with React v16.8 and reasy to use
+useFormless is now updated with React v16.8 and ready to use
 
 # API
 
@@ -132,9 +120,10 @@ common behavior for forms
 | setValues({}: values)               | set all values also of party forms but it doesn't fire validations|
 | touchValue(name)                    | mark the value passed as touched                            |
 | reset()                             | set all values as initialValues Object                      |
+| party(name: string, { validate: function}))                             | you can create nested forms, this function receives a name and validate option that allow you valdiate this party only, also it work like an object returned by useFormless and another party function to continue adding more nested forms                     |
 | validateForm()                   | Run validations, set errors and mark all objects as touched |
 | validateValue()                 | Run validations, set errors and mark all objects as touched |
-| validateParty()                  | Run validations only for a nested form, set errors and mark all objects as touched |
+| validateParty(                  | Run validations only for a nested form, set errors and mark all objects as touched |
 | isValid: boolean                          | true: is for a valid form, false: is for a invalid form     |
 
 
@@ -145,14 +134,14 @@ When we created useFormless, we thought about separating behavior and UI, becaus
 | Function                         | Description |
 | -------------------------------- | ----------- |
 | inputProps(name: String): Object | This funtion will return custom props `{name, value, onChange, onBlur}`, pass this object to your input component directly, [see example](#Examples) |
-| inputCheckboxProps(name: String): Object | The same for inputProps but for checkbox|
+| inputCheckboxProps(name: String): Object | The same for inputProps but for checkbox inputs|
 | onSubmit(SyntathicEvent): void  | Handle submit event, this will trigger either onSuccess or onError functions|
 
 ### Examples
 
-```<input id="my-input" type="text" {...inputProps('email')}>```
-
 ```<form id="my-form" onSubmit={onSubmit}>```
+
+```<input id="my-input" type="text" {...inputProps('email')}>```
 
 # Running the tests
 
@@ -160,7 +149,7 @@ In order to run tests use `jest` and `react-testing-library`
 
 # Built With
 
-* [react16.7-alpha.0](https://reactjs.org/docs/hooks-intro.html) - The web framework used
+* [react16.8](https://reactjs.org/docs/hooks-intro.html) - The web framework used
 * [yarn](https://yarnpkg.com/en/) - For dependencies management
 
 # Authors
@@ -171,3 +160,7 @@ In order to run tests use `jest` and `react-testing-library`
 # Acknowledgments
 
 * Similar libraries; formik and redux-form
+
+#License
+
+useFormless is [MIT licensed](https://github.com/facebook/react/blob/master/LICENSE)
