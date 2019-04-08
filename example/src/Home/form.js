@@ -48,7 +48,7 @@ export default (props) => {
             {getError('terms')}
           </p>
         </div>
-        <p className="has-text-grey-dark">this form is: {isValid ? 'valid' : 'invalid'}</p>
+        <p className="has-text-grey-dark">this form is: {isValid() ? 'valid' : 'invalid'}</p>
         <div className="field">
           <div className="buttons has-addons">
             <button className="button is-primary is-outlined" type="button" onClick={validateForm}>validate form</button>
