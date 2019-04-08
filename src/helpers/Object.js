@@ -1,5 +1,5 @@
 export const isObject = (obj) =>
-  typeof obj === 'object' && !Array.isArray(obj)
+  !!obj && typeof obj === 'object' && !Array.isArray(obj)
 
 export const iterateObject = (target, updateValue) =>
   Object.entries(target).reduce((newObject, [key, value]) =>
@@ -34,3 +34,10 @@ export const getRecursive = (object, { path = [] }) =>
     (reducedObject, currentPath) =>
       reducedObject[currentPath],
     object)
+
+export const filter = (object, callback) =>
+  Object.entries(object).reduce((filteredObject, [key, value]) =>
+    callback(key, value)
+      ? {...filteredObject, [key]: value}
+      : filteredObject
+  , {})
