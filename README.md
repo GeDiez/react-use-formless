@@ -10,9 +10,9 @@
 [![Build Status](https://travis-ci.org/GeDiez/react-use-formless.svg?branch=master)](https://travis-ci.org/GeDiez/react-use-formless)
 [![styled with standard](https://img.shields.io/badge/styled_with-standard-ff69b4.svg)](https://github.com/standard/standard)
 
-# Installing
+# Getting Started
 
-how to install
+## Step 1: install it
 
 ```bash
 $> yarn add react-useformless
@@ -20,17 +20,15 @@ $> yarn add react-useformless
 $> npm install react-useformless
 ```
 
-# Getting Started
-
-## Step 1 Import it 📦
+## Step 2: import it 📦
 
 ```js
 import useFormless from 'react-useformless';
 ```
 
-## Step 2 State and Options
+## Step 3: state and options
 
-useFormless hook receives:
+useFormless accepts an optional object that let's you add validations handlers
 
 1. **options(optional)**
 ```js
@@ -66,13 +64,13 @@ useFormless hook receives:
   }
 }
 ```
-## Step 3 Use it 💡
+## Step 4: use it! 💡
 
 Create an instance of useFormless and render it, easy, isn't it? 💃🏻
 
 ```jsx
 
-const { values, errors, inputProps, onSubmit } = useFormeless({ initialValues }, { validate, onSuccess, onError });
+const { values, errors, inputProps, onSubmit } = useFormless({ initialValues }, { validate, onSuccess, onError });
 
 return(
   <section>
@@ -94,24 +92,24 @@ return(
 
 # Prerequisites
 
-React hooks already are stables, so what are you waiting for?
+React hooks are live now, so what are you waiting for?
 useFormless is now updated with React v16.8 and ready to use
 
 # API
 
-useFormless provides you some methods so you can add them to your Component.
+useFormless provides you a clean and easy-to-use api that you can attach to any component.
 
 >Notice: use react-hooks into functional components.
 
-Objects returned
+#### Objects returned:
 
 | Name              | Description                                                           |
 | ----------------- | --------------------------------------------------------------------- |
-| values: `Object`  | an Object `{}` contains all values using the key as name, see example above |
-| errors: `Object`  | an Object `{}` contains all errors using the key as name              |
-| touched: `Object` | an Object `{}` contains all values have been touched/modified         |
+| values: `Object`  | contains all values using the key as name, see example above          |
+| errors: `Object`  | contains all errors using the key as name                             |
+| touched: `Object` | contains all values have been touched/modified                        |
 
-common behavior for forms
+#### Common behavior for forms:
 
 | Function                                  | Description                                                 |
 | ----------------------------------------- | ----------------------------------------------------------- |
@@ -127,9 +125,9 @@ common behavior for forms
 | isValid: boolean                          | true: is for a valid form, false: is for a invalid form     |
 
 
-Helpers
+#### Helpers
 
-When we created useFormless, we thought about separating behavior and UI, because of it your components are more resuables.
+useFormless split the behavior and the UI, so your components become more resuables.
 
 | Function                         | Description |
 | -------------------------------- | ----------- |
@@ -143,9 +141,11 @@ When we created useFormless, we thought about separating behavior and UI, becaus
 
 ```<input id="my-input" type="text" {...inputProps('email')}>```
 
-# Running the tests
+# Contribute
 
-In order to run tests use `jest` and `react-testing-library`
+## Running the tests
+
+useFormless uses `jest` and `react-testing-library`
 
 # Built With
 
@@ -159,8 +159,8 @@ In order to run tests use `jest` and `react-testing-library`
 
 # Acknowledgments
 
-* Similar libraries; formik and redux-form
+* Similar libraries; [formik](https://jaredpalmer.com/formik/) and [redux-form](https://redux-form.com/8.1.0/)
 
-#License
+# License
 
 useFormless is [MIT licensed](https://github.com/facebook/react/blob/master/LICENSE)
