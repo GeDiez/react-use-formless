@@ -47,7 +47,7 @@ const builtInHandlersForForm = (Dformless, IStore, path, { initialValues = {}, v
         value: Dformless.getValue(IStore.values, { name, path }),
         path,
         validate: (name, value) =>
-          validate(name, value, {values: IStore.values, touched: IStore.touched})
+          validate(name, value, { values: Dformless.getValuesParty(IStore.values, { path }) })
       }))
 
   const validateForm = () => {
@@ -58,9 +58,9 @@ const builtInHandlersForForm = (Dformless, IStore, path, { initialValues = {}, v
     IStore.dispatchErrors(errors)
   }
 
-  const isValid = Dformless.isValid(IStore.errors)
+  const isValid = () => Dformless.isValid(IStore.errors)
 
-  const isValidParty = Dformless.isValidParty(IStore.errors, { path })
+  const isValidParty = () => Dformless.isValidParty(IStore.errors, { path })
 
   return ({
     getValue,

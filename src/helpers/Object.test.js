@@ -1,4 +1,4 @@
-import { setObjectNested, objectValuesReduce } from './Object'
+import { setObjectNested, objectValuesReduce, filter } from './Object'
 
 describe('Object helpers', () => {
   describe('setObjectNested helper', () => {
@@ -53,6 +53,30 @@ describe('Object helpers', () => {
       expect(fn.mock.calls[3]).toEqual([0, 31])
       expect(fn.mock.calls[4]).toEqual([0, 32])
       expect(fn.mock.calls[5]).toEqual([0, 331])
+    })
+  })
+
+  describe('filter function', () => {
+    test('should filter each pair(key, value) of an object which are true for tha callback given', () => {
+      const tree = {
+        value1: 5,
+        value2: '2',
+        value3: 1,
+        value4: 1,
+        value5: 2
+      }
+
+      const newTree = filter(tree, (key, value) => {
+        if (value === 1 || key === 'value1') {
+          return true
+        }
+      })
+
+      expect(newTree).toEqual({
+        value1: 5,
+        value3: 1,
+        value4: 1
+      })
     })
   })
 })
