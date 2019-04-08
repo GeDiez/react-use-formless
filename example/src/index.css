@@ -10,5 +10,18 @@ body {
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  monospace;
+}
+
+img {
+  object-fit: cover;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+.is-scrollable {
+  height: 100%;
+  overflow: scroll;
 }
