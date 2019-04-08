@@ -20,7 +20,7 @@ const createParty = (Dformless, IStore, options) => {
       values,
       touched,
       errors,
-      ...builtInHandlersForForm(Dformless, IStore, newPath, options),
+      ...builtInHandlersForForm(Dformless, IStore, newPath, options, taskerValidations),
       ...builtInInputProps(Dformless, IStore, newPath, options, taskerValidations),
       party: (name, partyOptions = { validate: () => '' }) =>
         createParty(
