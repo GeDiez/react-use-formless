@@ -1,24 +1,27 @@
 {
-  "name": "react-useformless-example",
+  "name": "example",
   "homepage": "https://gediez.github.io/react-use-formless",
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "classnames": "^2.2.6",
-    "bulma": "0.5.0",
+    "customize-cra": "^0.2.10",
+    "jest": "^23.6.0",
     "node-sass": "^4.9.4",
     "prop-types": "^15.6.2",
-    "react": "^16.7.0-alpha.0",
-    "react-dom": "^16.7.0-alpha.0",
-    "react-scripts": "2.1.1",
-    "react-useformless": "link:.."
+    "react": "16.8.5",
+    "react-app-rewire-hot-loader": "^1.0.3",
+    "react-app-rewire-yarn-workspaces": "^1.0.3",
+    "react-app-rewired": "^2.0.2",
+    "react-dom": "16.8.5",
+    "react-hot-loader": "^4.6.3",
+    "react-scripts": "2.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test --env=jsdom",
+    "eject": "react-app-rewired eject"
   },
   "eslintConfig": {
     "extends": "react-app"
