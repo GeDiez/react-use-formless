@@ -10,29 +10,26 @@ const setValue = setObjectNested
 const setError = (errors, { name, error, path }) =>
   setObjectNested(errors, { name, value: error, path })
 
-const touchAllValues = values =>
+const touchAllFields = values =>
   iterateObject(values, ([key, _]) => ({ [key]: true }))
 
-const touchValue = (touched, { path = [], name }) =>
+const touchField = (touched, { path = [], name }) =>
   setObjectNested(touched, { path, name, value: true })
 
-const isAllValuesTouched = (touched) =>
-  objectValuesReduce(touched, (acc, value) => acc || value, false)
-
-const untouchValue = (touched, { path = [], name }) =>
+const untouchField = (touched, { path = [], name }) =>
   setObjectNested(touched, { path, name, value: false })
 
-const validateValue = (errors, { name, value, validate, path }) =>
+const validateField = (errors, { name, value, validate, path }) =>
   setObjectNested(errors, { path, name, value: validate(name, value) || '' })
 
 // create a function that validate the form values at this level
 const validateParty = (values, errors, { path, validate }) => {
-  // get only tha values por this party
+  // get only the values for this party
   const partyValues = getRecursive(values, { path })
 
   return Object.entries(partyValues).reduce((errors, [name, value]) => {
     if (isObject(value)) { return errors }
-    return validateValue(errors, { name, value, validate: validate, path })
+    return validateField(errors, { name, value, validate: validate, path })
   }, errors)
 }
 
@@ -41,15 +38,26 @@ const isValid = errors =>
     return isValid && value === ''
   }, true)
 
+const isValidParty = (errors, { path }) => {
+  const partyErrors = getRecursive(errors, { path })
+  if (!partyErrors) return false
+
+  return Object.values(partyErrors).reduce((isValid, value) => {
+    if (isObject(value)) return isValid
+    if (value !== '') return false
+    return isValid
+  }, true)
+}
+
 export const formless = {
   getValue,
   setValue,
   setError,
   isValid,
-  touchAllValues,
-  touchValue,
-  untouchValue,
-  validateValue,
-  validateParty,
-  isAllValuesTouched
+  isValidParty,
+  touchAllFields,
+  touchField,
+  untouchField,
+  validateField,
+  validateParty
 }

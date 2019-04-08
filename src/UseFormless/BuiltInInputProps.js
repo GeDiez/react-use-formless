@@ -7,7 +7,7 @@ const builtInInputProps = (Dformless, IStore, path, options, taskerValidations) 
 
   const initializeInputProps = pipe(
     (name, initialValue) => IStore.dispatchValues(Dformless.setValue(IStore.values, { name, value: initialValue, path })),
-    (name, _) => IStore.dispatchTouched(Dformless.untouchValue(IStore.touched, { name, path })),
+    (name, _) => IStore.dispatchTouched(Dformless.untouchField(IStore.touched, { name, path })),
     (name, _) => handlers.setError(name, '')
   )
 
@@ -21,8 +21,8 @@ const builtInInputProps = (Dformless, IStore, path, options, taskerValidations) 
       value: handlers.getValue(name),
       onChange: ({ target: { value } }) => handlers.setValue(name, value),
       onBlur: () => {
-        handlers.touchValue(name)
-        handlers.validateValue(name)
+        handlers.touchField(name)
+        handlers.validateField(name)
       }
     }
   }
@@ -37,8 +37,8 @@ const builtInInputProps = (Dformless, IStore, path, options, taskerValidations) 
       checked: handlers.getValue(name),
       onChange: () => handlers.setValue(name, !handlers.getValue(name)),
       onBlur: () => {
-        handlers.touchValue(name)
-        handlers.validateValue(name)
+        handlers.touchField(name)
+        handlers.validateField(name)
       },
       type: 'checkbox'
     }
@@ -48,9 +48,10 @@ const builtInInputProps = (Dformless, IStore, path, options, taskerValidations) 
     const errors = taskerValidations.pipe(IStore.errors)
 
     if (Dformless.isValid(errors)) {
-      options.onSuccess(syntathicEvent)
+      options.onSuccess(syntathicEvent, { values: IStore.values })
       return
     }
+    handlers.touchAllFields()
     IStore.dispatchErrors(errors)
     options.onError(syntathicEvent)
   }

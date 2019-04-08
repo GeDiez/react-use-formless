@@ -2,12 +2,15 @@ import { pipe } from '../helpers/functions'
 
 // @function builtInHandlersForForm
 // connectting logic between domain with global state and behavior of a formulary of our app
-const builtInHandlersForForm = (Dformless, IStore, path, { initialValues = {}, validate = () => '', onSuccess = () => {}, onError = () => {} }) => {
+const builtInHandlersForForm = (Dformless, IStore, path, { initialValues = {}, validate = () => '' }, taskerValidations) => {
   const getValue = name => Dformless.getValue(IStore.values, { name, path })
 
   const setValue = pipe(
-    (name, _) => IStore.dispatchTouched(Dformless.touchValue(IStore.touched, { name, path })),
+    (name, _) => IStore.dispatchTouched(Dformless.touchField(IStore.touched, { name, path })),
     (name, value) => IStore.dispatchValues(Dformless.setValue(IStore.values, { name, value, path })))
+
+  const setValues = (newValues) =>
+    IStore.dispatchValues(newValues)
 
   const setError = (name, error) =>
     IStore.dispatchErrors(
@@ -19,11 +22,25 @@ const builtInHandlersForForm = (Dformless, IStore, path, { initialValues = {}, v
           path
         }))
 
-  const touchValue = name =>
-    IStore.dispatchTouched(Dformless.touchValue(IStore.touched, { name, path }))
+  const getError = (name) =>
+    Dformless.getValue(IStore.errors, { path, name })
 
-  const validateValue = name =>
-    IStore.dispatchErrors(Dformless.validateValue(
+  const touchField = name =>
+    IStore.dispatchTouched(Dformless.touchField(IStore.touched, { name, path }))
+
+  const touchAllFields = () =>
+    IStore.dispatchTouched(Dformless.touchAllFields(IStore.values))
+
+  const reset = pipe(
+    () => IStore.dispatchValues(initialValues),
+    () => IStore.dispatchErrors({}))
+
+  const shouldShowError = (name) =>
+    Dformless.getValue(IStore.touched, { path, name }) &&
+    Dformless.getValue(IStore.errors, { path, name }) !== ''
+
+  const validateField = name =>
+    IStore.dispatchErrors(Dformless.validateField(
       IStore.errors,
       {
         name,
@@ -33,24 +50,32 @@ const builtInHandlersForForm = (Dformless, IStore, path, { initialValues = {}, v
           validate(name, value, {values: IStore.values, touched: IStore.touched})
       }))
 
-  const reset = pipe(
-    () => IStore.dispatchValues(initialValues),
-    () => IStore.dispatchErrors({}))
+  const validateForm = () => {
+    const errors = taskerValidations.pipe(IStore.errors)
 
-  const setValues = (newValues) =>
-    IStore.dispatchValues(newValues)
+    if (Dformless.isValid(errors)) return
+    touchAllFields()
+    IStore.dispatchErrors(errors)
+  }
 
   const isValid = Dformless.isValid(IStore.errors)
+
+  const isValidParty = Dformless.isValidParty(IStore.errors, { path })
 
   return ({
     getValue,
     setValue,
     setValues,
-    touchValue,
+    getError,
     setError,
-    validateValue,
+    shouldShowError,
+    touchField,
+    touchAllFields,
+    validateField,
+    validateForm,
     reset,
-    isValid
+    isValid,
+    isValidParty
   })
 }
 

@@ -66,7 +66,7 @@ describe('formless domain logic', () => {
 
   describe('touchAllValues function', () => {
     test('should create a new tree with all values as touched', () => {
-      const newState = formless.touchAllValues(state)
+      const newState = formless.touchAllFields(state)
       expect(newState).toEqual({
         name: true,
         surName: true,
@@ -84,7 +84,7 @@ describe('formless domain logic', () => {
   describe('touchValue function', () => {
     test('should mark a name given as touched and returning a new state', () => {
       const path = ['address']
-      const newState = formless.touchValue(touchedState, { path, name: 'street' })
+      const newState = formless.touchField(touchedState, { path, name: 'street' })
       expect(newState).toEqual({
         name: false,
         surName: false,
