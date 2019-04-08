@@ -28,7 +28,8 @@ export default (props) => {
         terms: value === false && 'you must accept terms!',
         aboutyou: value === '' && 'please tell us a little bit about you',
       }
-      return validations[name] || ''
+
+      return validations[name]
     }
   })
 
