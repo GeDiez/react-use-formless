@@ -6,24 +6,21 @@
 
 > react-useformless is a simple library that allows you to control forms with react-hooks approach
 
+[![Awesome](https://awesome.re/badge.svg)](https://github.com/rehooks/awesome-react-hooks)
 [![Build Status](https://travis-ci.org/GeDiez/react-use-formless.svg?branch=master)](https://travis-ci.org/GeDiez/react-use-formless)
 [![styled with standard](https://img.shields.io/badge/styled_with-standard-ff69b4.svg)](https://github.com/standard/standard)
-
-[![Awesome](https://awesome.re/badge.svg)](https://github.com/rehooks/awesome-react-hooks)
 
 # Installing
 
 how to install
 
-``` bash
+```bash
 $> yarn add react-useformless
 
 $> npm install react-useformless
 ```
 
 # Getting Started
-
-Using a form has never been so easy! Try it!
 
 ## Step 1 Import it 📦
 
@@ -33,29 +30,34 @@ import useFormless from 'react-useformless';
 
 ## Step 2 State and Options
 
-useFormless hook receives two params:
+useFormless hook receives:
 
-1. **The initial state** so far this hook only receives initialValues as follow;
-``` js
-{
-  initialValues: {
-    name: 'Juan Amezcua',
-    email: 'juan@email.com',
-    // ...others values
-  }
-}
-```
-
-2. **options(optional)** you can validate in just one Object and also add handlers for success or error
+1. **options(optional)**
 ```js
 {
-  validate: ({ values }) => {
-    // this must return an Object, it must contain `name: 'string with error or empty string or null'`
-    email: validateName(values.email): string
+  initialValues: {
+    name: '',
+    email: '',
+  },
+  validate: (name, value) => {
+    // This function receives name and value as parameters and will return a string given name
+    // You can do your valdiations as follow
+
+    // 1.- Define a object with function validations for each name in the form
+    // functions receives the value and return a error for it
+    const validators = {
+      name: validateNameFunction,
+      email: validateEmailFuntion
+      // ... else function validations for each field
+    }
+
+    // 2.- get the function for given `name` and then is called with tha value
+    const errorFn = validators[name]
+    return errorFn(value)
   },
   onError: (ev: DOMEvent) => {
     // if you decide using onSubmit function provided by formless, this function is fired after submit error
-    // It receives DOMevent so you do whatever you want after
+    // It receives DOMevent so you do whatever you want after it ends
   },
   onSuccess: (ev: DOMEvent) => {
     //same as error option but it is fired on success
@@ -66,21 +68,10 @@ useFormless hook receives two params:
 
 Create an instance of useFormless and render it, easy, isn't it? 💃🏻
 
-``` js
-// Validate name is a function that receives an Object with values and must return an object that looks like the following:
-// Notice: validateName, validateUsername and validateEmail functions must return a string
-const validate = ({ values }) => ({
-  name: validateName(),
-  username: validateUsername(),
-  email: validateEmail(),
-  //... more validations
-});
+```jsx
 
 const { values, errors, inputProps, onSubmit } = useFormeless({ initialValues }, { validate, onSuccess, onError });
-```
-Finally use it in your Form Component: for instance, we created this component that allow you to see the values, errors and touched values
 
-``` html
 return(
   <section>
     {notification && (
@@ -115,7 +106,8 @@ return(
 
 # Prerequisites
 
-This version of formless is based in "16.7.0-alpha.0", you can use it and test it but you must not use it in production environments because react-hooks are still a proposal 👩🏻‍🔬 👨🏻‍🔬 ⚗️
+React hooks already are stables, so what are you waiting for?
+useFormless is now updated with React v16.8 and reasy to use
 
 # API
 
@@ -131,25 +123,30 @@ Objects returned
 | errors: `Object`  | an Object `{}` contains all errors using the key as name              |
 | touched: `Object` | an Object `{}` contains all values have been touched/modified         |
 
-Function for handle values
+common behavior for forms
 
 | Function                                  | Description                                                 |
 | ----------------------------------------- | ----------------------------------------------------------- |
-| setValue(name: string, value: any) : void | set a value and validates if it has errors                  |
-| touchValue(name): void                    | mark the value passed as touched                            |
-| reset(): void                             | set all values as initialValues Object                      |
-| setAllValues({}: values): void            | set all values with the new object of values passed         |
-| validateValues(): boolean                 | Run validations, set errors and mark all objects as touched |
+| setValue(name: string, value: any) | set a value and validates if it has error                   |
+| getValue(name: string)             | get a value given a name                                    |
+| setValues({}: values)               | set all values also of party forms but it doesn't fire validations|
+| touchValue(name)                    | mark the value passed as touched                            |
+| reset()                             | set all values as initialValues Object                      |
+| validateForm()                   | Run validations, set errors and mark all objects as touched |
+| validateValue()                 | Run validations, set errors and mark all objects as touched |
+| validateParty()                  | Run validations only for a nested form, set errors and mark all objects as touched |
+| isValid: boolean                          | true: is for a valid form, false: is for a invalid form     |
 
-Functions for DOM interface
 
-When we created useFormless, we thought about separating logic and DOM logic, because it is more resuable.
-we define 2 method in order to handle inputs and form interface directly.
+Helpers
+
+When we created useFormless, we thought about separating behavior and UI, because of it your components are more resuables.
 
 | Function                         | Description |
 | -------------------------------- | ----------- |
 | inputProps(name: String): Object | This funtion will return custom props `{name, value, onChange, onBlur}`, pass this object to your input component directly, [see example](#Examples) |
-| onSubmit(event: DOMEvent): void  | Handle submit event, this will trigger either onSuccess or onError functions|
+| inputCheckboxProps(name: String): Object | The same for inputProps but for checkbox|
+| onSubmit(SyntathicEvent): void  | Handle submit event, this will trigger either onSuccess or onError functions|
 
 ### Examples
 
