@@ -5,6 +5,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "classnames": "^2.2.6",
     "customize-cra": "^0.2.10",
     "jest": "^23.6.0",
     "node-sass": "^4.9.4",
@@ -14,8 +15,9 @@
     "react-app-rewire-yarn-workspaces": "^1.0.3",
     "react-app-rewired": "^2.0.2",
     "react-dom": "16.8.5",
-    "react-hot-loader": "^4.6.3",
-    "react-scripts": "2.1.0"
+    "react-fast-highlight": "^2.2.2",
+    "react-scripts": "2.1.0",
+    "react-useformless": "link:.."
   },
   "scripts": {
     "start": "react-app-rewired start",

@@ -1,21 +1,14 @@
-<h1 align="center">
-  <img src="/example/public/logo-useformless.png" alt="logo" />
-</h1>
-
-# useFormless
-
-This a very simple example, this implments bulma so you can see how errors are shown
-Try it!
-
-```jsx
 import React, {useState} from 'react';
 import useFormless from "react-useformless";
-import classnames from 'classnames';
+import classnames from "classnames"
 
+import { ProfileForm } from "./ProfileForm";
+import { AddressForm } from "./AddressForm";
+import { StateDataFormless } from "./StateDataFormless";
 
 export default (props) => {
   const [isOpen, toggle] = useState(false)
-  const { inputProps, inputCheckboxProps, shouldShowError, getError, reset, onSubmit } = useFormless({
+  const { inputProps, inputCheckboxProps, values, touched, errors, isValid, shouldShowError, getError, party, reset, onSubmit, validateForm } = useFormless({
     onSuccess: (ev) => {
       ev.preventDefault()
       toggle(true)
@@ -34,10 +27,12 @@ export default (props) => {
 
   return (
     <>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} {...props}>
+        <ProfileForm party={party}/>
+        <AddressForm party={party} />
         <div className="field">
           <div className="control">
-            <textarea className="textarea" {...inputProps('aboutyou')} placeholder="tell us something interesting about you ^^" cols="80" rows="10"/>
+            <textarea className={classnames("textarea" ,{'is-danger': shouldShowError('aboutyou')})} {...inputProps('aboutyou')} placeholder="tell us something interesting about you ^^" cols="80" rows="10"/>
           </div>
           <p className={classnames('help is-danger', {'is-hidden': !shouldShowError('aboutyou')})}>
             {getError('aboutyou')}
@@ -45,7 +40,7 @@ export default (props) => {
         </div>
         <div className="field">
           <div className="control">
-            <label htmlFor="terms" className="checkbox">
+            <label htmlFor="terms" className={classnames("checkbox" ,{'is-danger': shouldShowError('aboutyou')})}>
               <input id="terms" type="checkbox" {...inputCheckboxProps('terms', false)} /> you accept terms and conditions
             </label>
           </div>
@@ -53,13 +48,16 @@ export default (props) => {
             {getError('terms')}
           </p>
         </div>
+        <p className="has-text-grey-dark">this form is: {isValid ? 'valid' : 'invalid'}</p>
         <div className="field">
           <div className="buttons has-addons">
+            <button className="button is-primary is-outlined" type="button" onClick={validateForm}>validate form</button>
             <button className="button is-dark" type="button" onClick={reset}>reset</button>
             <button className="button is-success" type="submit">Send</button>
           </div>
         </div>
       </form>
+      <StateDataFormless className="column" values={values} touched={touched} errors={errors}/>
       <div class={classnames("modal", {'is-active': isOpen})}>
         <div class="modal-background"></div>
         <div class="modal-content">
@@ -71,4 +69,3 @@ export default (props) => {
       </div>
     </>)
 }
-```
