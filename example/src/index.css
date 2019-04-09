@@ -8,11 +8,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-  monospace;
-}
-
 img {
   object-fit: cover;
 }
@@ -24,4 +19,29 @@ img {
 .is-scrollable {
   height: 100%;
   overflow: scroll;
+}
+
+.prism-code {
+  text-align: left;
+  margin: 1em 0;
+  padding: 0.5em;
+}
+
+.token-line {
+  line-height: 1.5em;
+  height: auto;
+}
+
+.token-line .tag {
+  background-color: transparent;
+  padding-left: 0;
+  padding-right: 0.2em;
+  height: auto;
+}
+
+.code.lineNo {
+  display: inline-block;
+  width: 2em;
+  user-select: none;
+  opacity: 0.3;
 }

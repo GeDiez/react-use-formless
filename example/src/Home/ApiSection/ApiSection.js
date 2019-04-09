@@ -12,7 +12,6 @@ export function ApiSection(props) {
   const [currentContent, setContent] = useState('1.2')
 
   const Content = routes[currentContent] || (() => (<h3>No content found</h3>))
-  console.log(Content)
 
   return (
     <section id="api" className="section">

@@ -58,14 +58,14 @@ export default (props) => {
         </div>
       </form>
       <StateDataFormless className="column" values={values} touched={touched} errors={errors}/>
-      <div class={classnames("modal", {'is-active': isOpen})}>
-        <div class="modal-background"></div>
-        <div class="modal-content">
+      <div className={classnames("modal", {'is-active': isOpen})}>
+        <div className="modal-background"></div>
+        <div className="modal-content">
           <div className="box has-text-centered has-text-success">
             Validation has passed!
           </div>
         </div>
-        <button class="modal-close is-large" onClick={() => toggle(false)} aria-label="close"></button>
+        <button className="modal-close is-large" onClick={() => toggle(false)} aria-label="close"></button>
       </div>
     </>)
 }
