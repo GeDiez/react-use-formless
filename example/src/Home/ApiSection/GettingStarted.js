@@ -1,5 +1,5 @@
 import React from 'react';
-import { Highlight } from "../../shared/components";
+import { Code as Highlight } from "../../shared/components";
 
 export function GettingStarted({ setContent }) {
   return (
@@ -7,16 +7,16 @@ export function GettingStarted({ setContent }) {
         <h2 className="title is2">Getting Started</h2>
         <h3 className="title is-4">Installing</h3>
         <p>Download from npm through either yarn or npx</p>
-        <Highlight languages={["shell"]}>
+        <Highlight language="bash">
           $ yarn add --save react-useformless
         </Highlight>
         or
-        <Highlight languages={["shell"]}>
+        <Highlight language="bash">
           $ npx i react-useformless
         </Highlight>
 
         <h3 className="title is-4">First import it</h3>
-        <Highlight languages={["javascript"]}>
+        <Highlight language="jsx">
           {
 `import React from "react";
 import useFormless from "react-useformless";`}
@@ -24,7 +24,7 @@ import useFormless from "react-useformless";`}
 
         <h3 className="title is-4">Create an useFormless object</h3>
         <p>before we create an instance of useFormless, it could take an object of options to initialize the state of the form, all of this options are optionals </p>
-        <Highlight languages={['javascript']}>
+        <Highlight language="javascript">
           {
 `{
     initialValues: {...},
@@ -71,27 +71,38 @@ import useFormless from "react-useformless";`}
           <li>onSubmit(event)</li>
         </ul>
 
-        <Highlight languages={['javascript']}>
+        <Highlight language='jsx'>
 {`
 function MyForm() {
   const { inputProps, inputCheckboxProps, onSubmit } = useFormless()
 
   return (
     <form onSubmit={onSubmit}>
-      <div class="field">
-        <div class="control">
-          <textarea className="textarea" {...inputProps('aboutyou')} placeholder="tell us something interesting about you ^^" cols="80" rows="10"/>
+      <div className="field">
+        <div className="control">
+          <textarea
+            className="textarea"
+            {...inputProps('aboutyou')}
+            placeholder="tell us something interesting about you ^^"
+            cols="80"
+            rows="10"
+          />
         </div>
       </div>
-      <div class="field">
-        <div class="control">
+      <div className="field">
+        <div className="control">
           <label htmlFor="terms" className="checkbox">
-            <input id="terms" type="checkbox" {...inputCheckboxProps('terms', false)} /> you accept terms and conditions
+            <input
+              id="terms"
+              type="checkbox"
+              {...inputCheckboxProps('terms', false)}
+            />
+            you accept terms and conditions
           </label>
         </div>
       </div>
       <div className="field">
-        <div class="buttons has-addons">
+        <div className="buttons has-addons">
           <button className="button is-primary" type="button" onClick={reset}>reset</button>
           <button className="button is-info" type="submit">Send</button>
         </div>

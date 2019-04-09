@@ -1,1 +1,1 @@
-export { Highlight } from './Highlight'
+export { Code } from './Highlight'
