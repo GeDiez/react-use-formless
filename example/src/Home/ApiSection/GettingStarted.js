@@ -23,7 +23,7 @@ import useFormless from "react-useformless";`}
         </Highlight>
 
         <h3 className="title is-4">Create an useFormless object</h3>
-        <p>before we create an instance of useFormless, it could take an object of options to initialize the state of the form, all of this options are optionals </p>
+        <p>before we create an instance of useFormless, it could take an object of options to initialize the state of the form, all of this are optionals </p>
         <Highlight language="javascript">
           {
 `{
