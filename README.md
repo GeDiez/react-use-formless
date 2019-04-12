@@ -70,7 +70,7 @@ Create an instance of useFormless and render it, easy, isn't it? 💃🏻
 
 ```jsx
 
-const { values, errors, inputProps, onSubmit } = useFormless({ initialValues }, { validate, onSuccess, onError });
+const { values, errors, inputProps, onSubmit } = useFormless({ initialValues, validate, onSuccess, onError });
 
 return(
   <section>

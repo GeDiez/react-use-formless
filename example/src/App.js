@@ -21,6 +21,9 @@ const App = () => {
               </div>
               <div id="navbarMenuHeroC" className="navbar-menu">
                 <div className="navbar-end">
+                  <a className="navbar-item" href="#apiSection">
+                    Docs
+                  </a>
                   <a className="navbar-item" href="https://www.npmjs.com/package/react-useformless">
                     <div className="tags has-addons">
                       <span className="tag is-dark">npm</span>
@@ -67,7 +70,7 @@ const App = () => {
         </div>
       </section>
       <ExampleSection/>
-      <ApiSection/>
+      <ApiSection id="apiSection"/>
       <AuthorsSection/>
       <footer className="footer">
         <div className="content has-text-centered">
