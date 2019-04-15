@@ -39,28 +39,40 @@ const builtInHandlersForForm = (Dformless, IStore, path, { initialValues = {}, v
     Dformless.getValue(IStore.touched, { path, name }) &&
     Dformless.getValue(IStore.errors, { path, name }) !== ''
 
-  const validateField = name =>
-    IStore.dispatchErrors(Dformless.validateField(
+  const validateField = pipe(
+    touchField,
+    name => IStore.dispatchErrors(Dformless.validateField(
       IStore.errors,
       {
         name,
         value: Dformless.getValue(IStore.values, { name, path }),
         path,
-        validate: (name, value) =>
-          validate(name, value, { values: Dformless.getValuesParty(IStore.values, { path }) })
+        validate
       }))
+  )
 
   const validateForm = () => {
     const errors = taskerValidations.pipe(IStore.errors)
 
-    if (Dformless.isValid(errors)) return
+    if (Dformless.isValid(errors, { validate })) return
     touchAllFields()
     IStore.dispatchErrors(errors)
   }
 
-  const isValid = () => Dformless.isValid(IStore.errors)
+  const validateParty = pipe(
+    () => IStore.dispatchErrors(Dformless
+      .validateParty(
+        IStore.values,
+        IStore.errors,
+        {
+          path,
+          validate
+        })),
+    () => IStore.dispatchTouched(Dformless.touchAllFieldsParty(IStore.touched, { path })))
 
-  const isValidParty = () => Dformless.isValidParty(IStore.errors, { path })
+  const isValid = () => Dformless.isValid(IStore.errors, { validate })
+
+  const isValidParty = () => Dformless.isValidParty(IStore.errors, { path, validate })
 
   return ({
     getValue,
@@ -73,6 +85,7 @@ const builtInHandlersForForm = (Dformless, IStore, path, { initialValues = {}, v
     touchAllFields,
     validateField,
     validateForm,
+    validateParty,
     reset,
     isValid,
     isValidParty

@@ -41,3 +41,8 @@ export const filter = (object, callback) =>
       ? {...filteredObject, [key]: value}
       : filteredObject
   , {})
+
+export const reduce = (object, callback, initialValue) =>
+  Object.entries(object).reduce((acc, [key, value]) =>
+    callback(acc, key, value)
+  , initialValue)

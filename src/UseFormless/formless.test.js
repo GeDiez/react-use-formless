@@ -97,39 +97,12 @@ describe('formless domain logic', () => {
       expect(mockValidate.mock.calls[0]).toEqual(['reference', ''])
     })
 
-    test('if there is not validation this even must return the same values', () => {
-      const newErrorsState = formless.validateField(errorsState, { path, name: 'reference', value: '', validate: null })
-      expect(newErrorsState).toEqual(errorsState)
-    })
-
     test('should validate a value given a function validator and return a new errorState', () => {
       function validate(name, value) {
         return value === '' ? 'Required' : null
       }
 
       const newErrorsState = formless.validateField(errorsState, { path, name: 'reference', value: '', validate })
-      expect(newErrorsState).toEqual(errorsStateExpected)
-    })
-
-    test('should validate a value given a function validator within a object and return a new errorState', () => {
-      const validatorsObject = {
-        'reference': function validate(value) {
-          return value === '' ? 'Required' : null
-        }
-      }
-
-      const newErrorsState = formless.validateField(errorsState, { path, name: 'reference', value: '', validate: validatorsObject })
-      expect(newErrorsState).toEqual(errorsStateExpected)
-    })
-
-    test('should validate a value given a function validator within a object and return a new errorState', () => {
-      const validatorsObject = {
-        'reference': function validate(value) {
-          return value === '' ? 'Required' : null
-        }
-      }
-
-      const newErrorsState = formless.validateField(errorsState, { path, name: 'reference', value: '', validate: validatorsObject })
       expect(newErrorsState).toEqual(errorsStateExpected)
     })
   })
@@ -184,6 +157,80 @@ describe('formless domain logic', () => {
           }
         }
       })
+    })
+  })
+
+  describe('isValid function', () => {
+    test('should return true', () => {
+      const isValid = formless.isValid(errorsState)
+
+      expect(isValid).toBe(true)
+    })
+
+    test('should return false', () => {
+      const isValid = formless.isValid({
+        name: 'has error',
+        surName: '',
+        address: {
+          street: '',
+          city: '',
+          moreDetails: {
+            reference: ''
+          }
+        }
+      })
+
+      expect(isValid).toBe(false)
+    })
+
+    test('should return false if it found error at any nested party', () => {
+      const isValid = formless.isValid({
+        name: '',
+        surName: '',
+        address: {
+          street: '',
+          city: 'has error',
+          moreDetails: {
+            reference: ''
+          }
+        }
+      })
+
+      expect(isValid).toBe(false)
+    })
+  })
+
+  describe('validateParty', () => {
+    test('should validate recursively only the party form given the right path for it', () => {
+      const invalidState = {
+        name: 'Jonh',
+        surName: '',
+        address: {
+          street: 'Av. North',
+          city: '',
+          moreDetails: {
+            reference: 'next to farmacy'
+          }
+        }
+      }
+
+      const expectedErrorsState = {
+        name: '',
+        surName: 'has error',
+        address: {
+          street: '',
+          city: 'has error',
+          moreDetails: {
+            reference: ''
+          }
+        }
+      }
+
+      const validate = jest.fn((name, value) => value ? '' : 'has error')
+      // root form is considered as a party
+      const path = []
+      const newErrorState = formless.validateParty(invalidState, errorsState, { path, validate })
+      expect(newErrorState).toEqual(expectedErrorsState)
     })
   })
 })

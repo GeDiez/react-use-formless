@@ -1,3 +1,4 @@
+import { isObject } from '../helpers/Object'
 import builtInHandlersForForm from './BuiltInHandlersForForm'
 import builtInInputProps from './BuiltInInputProps'
 
@@ -13,15 +14,33 @@ const createParty = (Dformless, IStore, options) => {
   return (name, path = [], taskerValidations) => {
     const newPath = name ? [...path, name] : []
 
+    const createValidator = (values, validate) => (_name, value) => {
+      if (isObject(validate)) {
+        if (typeof validate[_name] === 'function') return validate[_name](value, { values: Dformless.getValuesParty(values, { path: newPath }) })
+        if (typeof validate[_name] === 'string') return validate[_name]
+      }
+      if (typeof (validate) === 'function') return validate(_name, value, { values: Dformless.getValuesParty(values, { path: newPath }) }) || ''
+      return ''
+    }
+
     // add validator function to tasker
-    taskerValidations.add(errors => Dformless.validateParty(IStore.values, errors, { path: newPath, validate: (name, value) => options.validate(name, value, { values: Dformless.getValuesParty(IStore.values, { path }) }) }))
+    const validatePartyTask = errors =>
+      Dformless
+        .validateParty(
+          IStore.values,
+          errors,
+          {
+            path: newPath,
+            validate: createValidator(IStore.values, options.validate)
+          })
+    taskerValidations.add(validatePartyTask)
 
     return ({
       values,
       touched,
       errors,
-      ...builtInHandlersForForm(Dformless, IStore, newPath, options, taskerValidations),
-      ...builtInInputProps(Dformless, IStore, newPath, options, taskerValidations),
+      ...builtInHandlersForForm(Dformless, IStore, newPath, {...options, validate: createValidator(IStore.values, options.validate)}, taskerValidations),
+      ...builtInInputProps(Dformless, IStore, newPath, {...options, validate: createValidator(IStore.values, options.validate)}, taskerValidations),
       party: (name, partyOptions = { validate: () => '' }) =>
         createParty(
           Dformless,
