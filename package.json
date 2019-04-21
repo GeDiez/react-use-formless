@@ -1,6 +1,6 @@
 {
   "name": "react-useformless",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A library to use controlled forms into react apps",
   "author": "gediez",
   "license": "MIT",
