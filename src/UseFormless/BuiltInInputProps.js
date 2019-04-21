@@ -41,13 +41,16 @@ const builtInInputProps = (handlers, options, taskerValidations) => {
   }
 
   return {
-    field: (name) => ({
-      props: initialValue => inputProps(name, initialValue),
+    field: (name, initialValue) => ({
+      name,
+      props: () => inputProps(name, initialValue),
+      checkboxProps: () => inputCheckboxProps(name, initialValue),
       isValid: () => handlers.isValidField(name),
       getValue: () => handlers.getValue(name),
       setValue: value => handlers.setValue(name, value),
       getError: () => handlers.getError(name),
       setError: error => handlers.setError(name, error),
+      touch: () => handlers.touchField(name),
       validate: () => handlers.validateField(name)
     }),
     form: ({
