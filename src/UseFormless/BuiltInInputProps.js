@@ -1,60 +1,61 @@
-import { pipe } from '../helpers/functions'
-import builtInHandlersForForm from './BuiltInHandlersForForm'
-
 // @function builtInInputProps to create properties for input tags in react
-const builtInInputProps = (Dformless, IStore, path, options, taskerValidations) => {
-  const handlers = builtInHandlersForForm(Dformless, IStore, path, options)
-
-  const initializeInputProps = pipe(
-    (name, initialValue) => IStore.dispatchValues(Dformless.setValue(IStore.values, { name, value: initialValue, path })),
-    (name, _) => IStore.dispatchTouched(Dformless.untouchField(IStore.touched, { name, path })),
-    (name, _) => handlers.setError(name, '')
-  )
-
+const builtInInputProps = (handlers, options, taskerValidations) => {
   const inputProps = (name, initialValue = '') => {
     if (handlers.getValue(name) === undefined) {
-      initializeInputProps(name, initialValue)
+      handlers.initField(name, initialValue)
     }
 
     return {
       name,
       value: handlers.getValue(name),
       onChange: ({ target: { value } }) => handlers.setValue(name, value),
-      onBlur: () => {
-        handlers.validateField(name)
-      }
+      onBlur: () => handlers.validateField(name)
     }
   }
 
   const inputCheckboxProps = (name, initialValue = false) => {
     if (handlers.getValue(name) === undefined) {
-      initializeInputProps(name, !!initialValue)
+      handlers.initField(name, !!initialValue)
     }
 
     return {
       name,
       checked: handlers.getValue(name),
       onChange: () => handlers.setValue(name, !handlers.getValue(name)),
-      onBlur: () => {
-        handlers.validateField(name)
-      },
+      onBlur: () => handlers.validateField(name),
       type: 'checkbox'
     }
   }
 
   const onSubmit = (syntathicEvent) => {
-    const errors = taskerValidations.pipe(IStore.errors)
+    const errors = taskerValidations.pipe(handlers.getErrors())
 
-    if (Dformless.isValid(errors, { validate: options.validate })) {
-      options.onSuccess(syntathicEvent, { values: IStore.values })
+    if (handlers.isValid(errors)) {
+      options.onSuccess(syntathicEvent, { values: handlers.getValues() })
       return
     }
+
     handlers.touchAllFields()
-    IStore.dispatchErrors(errors)
+    handlers.setErrors(errors)
     options.onError(syntathicEvent)
   }
 
   return {
+    field: (name) => ({
+      props: initialValue => inputProps(name, initialValue),
+      isValid: () => handlers.isValidField(name),
+      getValue: () => handlers.getValue(name),
+      setValue: value => handlers.setValue(name, value),
+      getError: () => handlers.getError(name),
+      setError: error => handlers.setError(name, error),
+      validate: () => handlers.validateField(name)
+    }),
+    form: ({
+      reset: handlers.reset,
+      isValid: handlers.isValid,
+      validate: handlers.validateForm,
+      onSubmit: onSubmit
+    }),
     onSubmit,
     inputProps,
     inputCheckboxProps

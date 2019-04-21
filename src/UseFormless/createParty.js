@@ -1,4 +1,3 @@
-import { isObject } from '../helpers/Object'
 import builtInHandlersForForm from './BuiltInHandlersForForm'
 import builtInInputProps from './BuiltInInputProps'
 
@@ -13,40 +12,29 @@ const createParty = (Dformless, IStore, options) => {
 
   return (name, path = [], taskerValidations) => {
     const newPath = name ? [...path, name] : []
+    const handlers = builtInHandlersForForm(Dformless, IStore, newPath, options, taskerValidations)
+    const reactFormProps = builtInInputProps(handlers, options, taskerValidations)
 
-    const createValidator = (values, validate) => (_name, value) => {
-      if (isObject(validate)) {
-        if (typeof validate[_name] === 'function') return validate[_name](value, { values: Dformless.getValuesParty(values, { path: newPath }) })
-        if (typeof validate[_name] === 'string') return validate[_name]
-      }
-      if (typeof (validate) === 'function') return validate(_name, value, { values: Dformless.getValuesParty(values, { path: newPath }) }) || ''
-      return ''
+    function create(name, partyOptions = { validate: () => '' }) {
+      return createParty(Dformless, IStore, { ...partyOptions, initialValues: options.initialValues })(name, newPath, taskerValidations)
     }
 
-    // add validator function to tasker
-    const validatePartyTask = errors =>
-      Dformless
-        .validateParty(
-          IStore.values,
-          errors,
-          {
-            path: newPath,
-            validate: createValidator(IStore.values, options.validate)
-          })
-    taskerValidations.add(validatePartyTask)
+    const party = {
+      create,
+      isValid: handlers.isValidParty,
+      validate: handlers.isValidParty,
+      reset: handlers.resetParty
+    }
 
     return ({
       values,
       touched,
       errors,
-      ...builtInHandlersForForm(Dformless, IStore, newPath, {...options, validate: createValidator(IStore.values, options.validate)}, taskerValidations),
-      ...builtInInputProps(Dformless, IStore, newPath, {...options, validate: createValidator(IStore.values, options.validate)}, taskerValidations),
-      party: (name, partyOptions = { validate: () => '' }) =>
-        createParty(
-          Dformless,
-          IStore,
-          { ...partyOptions, initialValues: options.initialValues }
-        )(name, newPath, taskerValidations)
+      ...handlers,
+      ...reactFormProps,
+      party
+      // party: (name, partyOptions = { validate: () => '' }) =>
+      //   createParty(Dformless, IStore, { ...partyOptions, initialValues: options.initialValues })(name, newPath, taskerValidations)
     })
   }
 }

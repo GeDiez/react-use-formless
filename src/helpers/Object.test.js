@@ -1,6 +1,27 @@
-import { setObjectNested, objectValuesReduce, filter } from './Object'
+import { set, objectValuesReduce, get, filter } from './Object'
 
 describe('Object helpers', () => {
+  describe('get helper', () => {
+    test('should get any value inside an object given a path', () => {
+      const target = {
+        level1: {
+          level2: {
+            level3: {
+              value: 1
+            }
+          }
+        }
+      }
+      const path = ['level1', 'level2', 'level3']
+      const path2 = ['level1', 'level2']
+      const value = get(target, { path, name: 'value' })
+      const value2 = get(target, { path: path2, name: 'level3' })
+
+      expect(value).toBe(1)
+      expect(value2).toEqual({ value: 1 })
+    })
+  })
+
   describe('setObjectNested helper', () => {
     const tree = {
       value1: 1,
@@ -15,7 +36,7 @@ describe('Object helpers', () => {
 
     test('updates a value inside a tree given a path and return a new tree(Object)', () => {
       const path = ['subtree', 'subsubtree']
-      const newTree = setObjectNested(tree, { path, name: 'valueNested', value: 'modified' })
+      const newTree = set(tree, { path, name: 'valueNested', value: 'modified' })
       expect(newTree).toEqual({
         value1: 1,
         value2: '2',
@@ -26,33 +47,6 @@ describe('Object helpers', () => {
           }
         }
       })
-    })
-  })
-
-  describe('objectValuesReduce helper', () => {
-    test('should call callback funcion for each value even they are nesting', () => {
-      const tree = {
-        value1: 'value1',
-        values2: {
-          value21: 21,
-          value22: '22'
-        },
-        value3: {
-          value31: 31,
-          value32: 32,
-          value33: {
-            value331: 331
-          }
-        }
-      }
-      const fn = jest.fn((acc, value) => acc)
-      objectValuesReduce(tree, fn, 0)
-      expect(fn.mock.calls[0]).toEqual([0, 'value1'])
-      expect(fn.mock.calls[1]).toEqual([0, 21])
-      expect(fn.mock.calls[2]).toEqual([0, '22'])
-      expect(fn.mock.calls[3]).toEqual([0, 31])
-      expect(fn.mock.calls[4]).toEqual([0, 32])
-      expect(fn.mock.calls[5]).toEqual([0, 331])
     })
   })
 

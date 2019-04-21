@@ -1,29 +1,34 @@
-import { setObjectNested, iterateObject, getRecursive, isObject, filter, reduce } from '../helpers/Object'
+import { set, iterateObject, get, getRecursive, setRecursive, isObject, filter, reduce } from '../helpers/Object'
 
-const getValue = (values, { path, name } = {}) =>
-  path.reduce((nestedObject, currentPath) =>
-    nestedObject[currentPath] || {}, values
-  )[name]
+const getValue = get
 
-const setValue = setObjectNested
+const getError = get
+
+const setValue = set
+
+const setValues = set
 
 const setError = (errors, { name, error, path }) =>
-  setObjectNested(errors, { name, value: error, path })
+  set(errors, { name, value: error, path })
 
-const getValuesParty = (values, { path }) =>
-  filter(getRecursive(values, { path }), (name, value) => !isObject(value))
+const isTouched = get
+
+const isValid = (errors) =>
+  reduce(errors, function isValidFn(isValid, name, value) {
+    if (isObject(value)) return reduce(value, isValidFn, isValid)
+    return value === '' && isValid
+  }, true)
+
+// Fields
 
 const touchAllFields = values =>
   iterateObject(values, ([key, _]) => ({ [key]: true }))
 
 const touchField = (touched, { path = [], name }) =>
-  setObjectNested(touched, { path, name, value: true })
+  set(touched, { path, name, value: true })
 
 const untouchField = (touched, { path = [], name }) =>
-  setObjectNested(touched, { path, name, value: false })
-
-const validateField = (errors, { name, value, validate, path }) =>
-  setObjectNested(errors, { path, name, value: validate(name, value) })
+  set(touched, { path, name, value: false })
 
 const touchAllFieldsParty = (touched, { path }) => {
   const partyTouched = getRecursive(touched, { path })
@@ -33,6 +38,17 @@ const touchAllFieldsParty = (touched, { path }) => {
     return touchField(touched, { name, path })
   }, touched)
 }
+
+const validateField = (errors, { name, value, validate, path }) =>
+  set(errors, { path, name, value: validate(name, value) })
+
+// party
+
+const getValuesParty = (values, { path }) =>
+  filter(getRecursive(values, { path }) || {}, (name, value) => !isObject(value))
+
+const setValuesParty = (values, { path, partyValues }) =>
+  setRecursive(values, { path, value: partyValues })
 
 // create a function that validate the form values at this level
 const validateParty = (values, errors, { path, validate }) => {
@@ -47,12 +63,6 @@ const validateParty = (values, errors, { path, validate }) => {
   return reduce(partyValues, setError, errors)
 }
 
-const isValid = (errors) =>
-  reduce(errors, function isValidFn(isValid, name, value) {
-    if (isObject(value)) return reduce(value, isValidFn, isValid)
-    return value === '' && isValid
-  }, true)
-
 const isValidParty = (errors, { path }) => {
   const partyErrors = getRecursive(errors, { path })
   if (!partyErrors) return false
@@ -63,7 +73,10 @@ const isValidParty = (errors, { path }) => {
 export const formless = {
   getValue,
   setValue,
+  setValues,
+  getError,
   setError,
+  isTouched,
   isValid,
   touchAllFields,
   touchAllFieldsParty,
@@ -71,6 +84,7 @@ export const formless = {
   untouchField,
   validateField,
   getValuesParty,
+  setValuesParty,
   validateParty,
   isValidParty
 }
