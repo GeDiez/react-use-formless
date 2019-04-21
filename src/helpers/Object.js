@@ -8,26 +8,23 @@ export const iterateObject = (target, updateValue) =>
       : ({ ...newObject, ...updateValue([key, value]) })
   , {})
 
-export const setObjectNested = (target, { path = [], path: [firstPath, ...nextPaths], name, value }) =>
+export const get = (target, { path, name } = {}) =>
+  path.reduce(
+    (nestedObject, currentPath) =>
+      nestedObject[currentPath] || {},
+    target
+  )[name]
+
+export const set = (target, { path = [], path: [firstPath, ...nextPaths], name, value }) =>
   path.length
     ? ({
       ...target,
-      [firstPath]: setObjectNested(target[firstPath] || {}, { path: nextPaths, name, value })
+      [firstPath]: set(target[firstPath] || {}, { path: nextPaths, name, value })
     })
     : ({
       ...target,
       [name]: value
     })
-
-export const objectValuesReduce = (values, cb, initialValue) =>
-  Object.values(values).reduce(
-    (accumalated, value) => {
-      if (isObject(value)) {
-        return objectValuesReduce(value, cb, accumalated)
-      }
-      return cb(accumalated, value)
-    },
-    initialValue)
 
 export const getRecursive = (object, { path = [] }) =>
   path.reduce(
@@ -35,9 +32,23 @@ export const getRecursive = (object, { path = [] }) =>
       reducedObject[currentPath],
     object)
 
+export const setRecursive = (object, { path = [], value }) => {
+  const [firstRoute, ...rest] = path
+  if (rest.length) {
+    return {...object, [firstRoute]: setRecursive(object[firstRoute], { path: rest, value })}
+  }
+
+  return { ...object, [firstRoute]: value }
+}
+
 export const filter = (object, callback) =>
   Object.entries(object).reduce((filteredObject, [key, value]) =>
     callback(key, value)
       ? {...filteredObject, [key]: value}
       : filteredObject
   , {})
+
+export const reduce = (object, callback, initialValue) =>
+  Object.entries(object).reduce((acc, [key, value]) =>
+    callback(acc, key, value)
+  , initialValue)
