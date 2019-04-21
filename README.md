@@ -116,9 +116,9 @@ useFormless provides you a clean and easy-to-use api that you can attach to any 
 | setValue(name: string, value: any) | set a value and validates if it has error                   |
 | getValue(name: string)             | get a value given a name                                    |
 | setValues({}: values)               | set all values also of party forms but it doesn't fire validations|
-| touchValue(name)                    | mark the value passed as touched                            |
+| touchFieldname)                    | mark the value passed as touched                            |
 | reset()                             | set all values as initialValues Object                      |
-| party(name: string, { validate: function}))                             | you can create nested forms, this function receives a name and validate option that allow you valdiate this party only, also it work like an object returned by useFormless and another party function to continue adding more nested forms                     |
+| party.create(name: string, { validate: function}))                             | you can create nested forms, this function receives a name and validate option that allow you valdiate this party only, also it work like an object returned by useFormless and another party function to continue adding more nested forms                     |
 | validateForm()                   | Run validations, set errors and mark all objects as touched |
 | validateValue()                 | Run validations, set errors and mark all objects as touched |
 | validateParty(                  | Run validations only for a nested form, set errors and mark all objects as touched |
@@ -134,6 +134,12 @@ useFormless split the behavior and the UI, so your components become more resuab
 | inputProps(name: String): Object | This funtion will return custom props `{name, value, onChange, onBlur}`, pass this object to your input component directly, [see example](#Examples) |
 | inputCheckboxProps(name: String): Object | The same for inputProps but for checkbox inputs|
 | onSubmit(SyntathicEvent): void  | Handle submit event, this will trigger either onSuccess or onError functions|
+| field | an object with functions for fields |
+| party | an object qith functions for party forms |
+| form | an object qith functions for forms |
+
+> see more about it in the docuemntation [official DOCS](https://gediez.github.io/react-use-formless/)
+
 
 ### Examples
 

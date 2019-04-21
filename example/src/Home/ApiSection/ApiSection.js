@@ -16,10 +16,13 @@ import { ResetSection } from "./resetSection";
 import { IsValidSection } from "./isValidSection";
 import { PartySection } from "./partySection";
 import { IsValidPartySection } from "./isValidPartySection";
+import { FieldSection } from "./FieldSection";
+import { FormSection } from "./FormSection";
 
 const routes = {
   '1.1': Introduction,
   '1.2': GettingStarted,
+  // secton II
   '2.1': ValuesTouchedErrorsSection,
   '2.2': GetValueSection,
   '2.3': SetValueSection,
@@ -30,8 +33,11 @@ const routes = {
   '2.8': ValidateFieldSection,
   '2.9': ResetSection,
   '2.10': IsValidSection,
-  '2.11': PartySection,
-  '2.12': IsValidPartySection
+  '2.11': IsValidPartySection,
+  // secton III
+  '3.4': FieldSection,
+  '3.5': PartySection,
+  '3.6': FormSection,
 }
 
 export function ApiSection(props) {
@@ -66,8 +72,7 @@ export function ApiSection(props) {
               <li><a className={cn({'is-active': currentContent === '2.8'})} onClick={() => setContent('2.8')}>validateField(name)</a></li>
               <li><a className={cn({'is-active': currentContent === '2.9'})} onClick={() => setContent('2.9')}>reset()</a></li>
               <li><a className={cn({'is-active': currentContent === '2.10'})} onClick={() => setContent('2.10')}>isValid()</a></li>
-              <li><a className={cn({'is-active': currentContent === '2.11'})} onClick={() => setContent('2.11')}>party(name, option)</a></li>
-              <li><a className={cn({'is-active': currentContent === '2.12'})} onClick={() => setContent('2.12')}>isValidParty()</a></li>
+              <li><a className={cn({'is-active': currentContent === '2.11'})} onClick={() => setContent('2.11')}>isValidParty()</a></li>
             </ul>
             <p className="menu-label">
               Helpers for React
@@ -76,6 +81,9 @@ export function ApiSection(props) {
               <li><a>inputProps(name, initialValue)</a></li>
               <li><a>inputCheckboxProps(name, initialValue)</a></li>
               <li><a>onSubmit(SyntathicEvent)</a></li>
+              <li><a className={cn({'is-active': currentContent === '3.4'})} onClick={() => setContent('3.4')}>Field</a></li>
+              <li><a className={cn({'is-active': currentContent === '3.5'})} onClick={() => setContent('3.5')}>Party</a></li>
+              <li><a className={cn({'is-active': currentContent === '3.6'})} onClick={() => setContent('3.6')}>Form</a></li>
             </ul>
           </aside>
           <div className="column is-8">

@@ -6,7 +6,7 @@ export function Code({children, language, ...props}) {
   return (
     <Highlight {...defaultProps} theme={theme} code={children.trim()} language={language}>
     {({ className, style, tokens, getLineProps, getTokenProps }) => (
-      <pre className="code pre" className={className} style={style}>
+      <pre className={`code pre ${className}`} style={style}>
         {tokens.map((line, i) => (
           <div {...getLineProps({ line, key: i })}>
             <span className="code lineNo">{i + 1}</span>
