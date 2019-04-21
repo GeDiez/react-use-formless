@@ -15,6 +15,7 @@ import { ValidateFieldSection } from "./validateFieldSection";
 import { ResetSection } from "./resetSection";
 import { IsValidSection } from "./isValidSection";
 import { PartySection } from "./partySection";
+import { IsValidPartySection } from "./isValidPartySection";
 
 const routes = {
   '1.1': Introduction,
@@ -29,11 +30,12 @@ const routes = {
   '2.8': ValidateFieldSection,
   '2.9': ResetSection,
   '2.10': IsValidSection,
-  '2.11': PartySection
+  '2.11': PartySection,
+  '2.12': IsValidPartySection
 }
 
 export function ApiSection(props) {
-  const [currentContent, setContent] = useState('2.2')
+  const [currentContent, setContent] = useState('1.1')
 
   const Content = routes[currentContent] || (() => (<h3>No content found</h3>))
 

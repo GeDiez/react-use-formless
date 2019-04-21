@@ -72,10 +72,10 @@ const App = () => {
       <ExampleSection/>
       <ApiSection id="apiSection"/>
       <AuthorsSection/>
-      <footer className="footer">
+      <footer className="footer has-background-grey-darker has-text-white">
         <div className="content has-text-centered">
           <p>
-            <strong>useFormless</strong>. The source code is licensed <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
+            <strong className="has-text-grey-lighter">useFormless</strong>. The source code is licensed <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
           </p>
         </div>
       </footer>
