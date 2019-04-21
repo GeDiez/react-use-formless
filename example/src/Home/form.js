@@ -9,7 +9,7 @@ import { StateDataFormless } from "./StateDataFormless";
 
 export default (props) => {
   const [isOpen, toggle] = useState(false)
-  const { inputProps, inputCheckboxProps, values, touched, errors, isValid, isValidField, getError, party, reset, onSubmit, validateForm, field } = useFormless({
+  const { values, touched, errors, party, reset, onSubmit, validateForm, field } = useFormless({
     onSuccess: (ev) => {
       ev.preventDefault()
       toggle(true)
@@ -31,8 +31,8 @@ export default (props) => {
       <form onSubmit={onSubmit} {...props}>
         <ProfileForm party={party}/>
         <AddressForm party={party} />
-        <Textarea field={field('aboutyou')} />
-        <Checkbox field={field('terms', false)}/>
+        <Textarea label="About you" field={field('aboutyou')} />
+        <Checkbox label="Accept the terms and conditions" field={field('terms', false)}/>
 
         <div className="field">
           <div className="buttons has-addons">

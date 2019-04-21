@@ -1,5 +1,4 @@
 import React from 'react';
-import classnames from "classnames";
 
 import { InputIcon, Input } from "../Elements";
 
@@ -20,10 +19,10 @@ export const ProfileForm = ({ party }) => {
 
   return (
     <>
-      <InputIcon field={profile.field('name', 'Jonh Lenon')} icon="fa-user"></InputIcon>
-      <InputIcon field={profile.field('email')}  icon="fa-envelope"></InputIcon>
-      <Input field={profile.field('password')} type="password"> </Input>
-      <Input field={profile.field('passwordConfirm')} type="password"> </Input>
+      <InputIcon label="Name" field={profile.field('name', 'Jonh Lenon')} icon="fa-user"></InputIcon>
+      <InputIcon label="Email"  field={profile.field('email')}  icon="fa-envelope"></InputIcon>
+      <Input label="Passowrd"  field={profile.field('password')} type="password"> </Input>
+      <Input label="Password confirm"  field={profile.field('passwordConfirm')} type="password"> </Input>
     </>
   )
 }
