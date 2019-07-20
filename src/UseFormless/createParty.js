@@ -33,8 +33,6 @@ const createParty = (Dformless, IStore, options) => {
       ...handlers,
       ...reactFormProps,
       party
-      // party: (name, partyOptions = { validate: () => '' }) =>
-      //   createParty(Dformless, IStore, { ...partyOptions, initialValues: options.initialValues })(name, newPath, taskerValidations)
     })
   }
 }

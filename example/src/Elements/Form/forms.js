@@ -27,7 +27,7 @@ export function Input({ field, type, label= '' }) {
 export function Textarea({ field, type, label= '' }) {
   return(
     <BaseInput label={label}  field={field}>
-      <textarea className={classnames("textarea" ,{'is-danger': field.isValid('aboutyou')})} {...field.props('aboutyou')} placeholder="tell us something interesting about you ^^" cols="80" rows="10"/>
+      <textarea className={classnames("textarea" ,{'is-danger': field.isValid()})} {...field.props()} placeholder="tell us something interesting about you ^^" cols="80" rows="10"/>
     </BaseInput>
 
   )
@@ -58,7 +58,7 @@ export function InputIcon({ field, icon, type, label= '' }){
       <span className="icon is-small is-left">
         <i className={classnames('fas', icon)}></i>
       </span>
-      <input id={field.name} type={type} className={classnames("input" ,{'is-danger': field.isValid('name')})}  {...field.props('name', 'Gibran')}/>
+      <input id={field.name} type={type} className={classnames("input" ,{'is-danger': field.isValid()})}  {...field.props()}/>
     </BaseInput>
   )
 }

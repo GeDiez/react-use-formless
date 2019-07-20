@@ -1,4 +1,4 @@
-import { set, objectValuesReduce, get, filter } from './Object'
+import { set, get, filter } from './Object'
 
 describe('Object helpers', () => {
   describe('get helper', () => {
