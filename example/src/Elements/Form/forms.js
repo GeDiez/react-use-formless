@@ -8,7 +8,7 @@ function BaseInput({ field, label= '', children, controlClass }) {
       <div className={classnames('control', controlClass)}>
         {children}
       </div>
-      <p className={classnames('help is-danger', {'is-hidden': !field.isValid()})}>
+      <p className={classnames('help is-danger', {'is-hidden': !field.shouldShowError()})}>
         {field.getError()}
       </p>
     </div>
@@ -18,7 +18,7 @@ function BaseInput({ field, label= '', children, controlClass }) {
 export function Input({ field, type, label= '' }) {
   return(
     <BaseInput label={label} field={field}>
-      <input className={classnames("input" ,{'is-danger': field.isValid()})}  type={type} {...field.props()}/>
+      <input className={classnames("input" ,{'is-danger': field.shouldShowError()})}  type={type} {...field.props()}/>
     </BaseInput>
 
   )
@@ -27,7 +27,7 @@ export function Input({ field, type, label= '' }) {
 export function Textarea({ field, type, label= '' }) {
   return(
     <BaseInput label={label}  field={field}>
-      <textarea className={classnames("textarea" ,{'is-danger': field.isValid()})} {...field.props()} placeholder="tell us something interesting about you ^^" cols="80" rows="10"/>
+      <textarea className={classnames("textarea" ,{'is-danger': field.shouldShowError()})} {...field.props()} placeholder="tell us something interesting about you ^^" cols="80" rows="10"/>
     </BaseInput>
 
   )
@@ -58,7 +58,7 @@ export function InputIcon({ field, icon, type, label= '' }){
       <span className="icon is-small is-left">
         <i className={classnames('fas', icon)}></i>
       </span>
-      <input id={field.name} type={type} className={classnames("input" ,{'is-danger': field.isValid()})}  {...field.props()}/>
+      <input id={field.name} type={type} className={classnames("input" ,{'is-danger': field.shouldShowError()})}  {...field.props()}/>
     </BaseInput>
   )
 }

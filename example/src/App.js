@@ -10,7 +10,7 @@ const App = () => {
           <header className="navbar">
             <div className="container">
               <div className="navbar-brand">
-                <a className="navbar-item">
+                <a href='/' className="navbar-item">
                   <img src="logo-useformless.png" alt="Logo" width="60px" />
                 </a>
                 <span className="navbar-burger burger" data-target="navbarMenuHeroC">
