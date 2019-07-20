@@ -7,7 +7,7 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "customize-cra": "^0.2.10",
-    "jest": "^23.6.0",
+    "jest": "^24.8",
     "node-sass": "^4.9.4",
     "prism-react-renderer": "^0.1.6",
     "prop-types": "^15.6.2",
@@ -29,7 +29,7 @@
     "extends": "react-app"
   },
   "engines": {
-    "node": "9.10"
+    "node": "10.15"
   },
   "browserslist": [
     ">0.2%",
