@@ -6,6 +6,10 @@ export const createTasker = function() {
     tasks = [...tasks, task]
   }
 
+  function getTasks () {
+    return tasks
+  }
+
   function remove(task) {
     tasks = tasks.filter(function(_task) {
       return task !== _task
@@ -25,7 +29,7 @@ export const createTasker = function() {
   }
 
   return {
-    tasks,
+    getTasks,
     add,
     remove,
     pipe,
