@@ -11,7 +11,7 @@ const App = () => {
             <div className="container">
               <div className="navbar-brand">
                 <a href='/' className="navbar-item">
-                  <img src="logo-useformless.png" alt="Logo" width="60px" />
+                  <img src="icon_200x200.png" alt="Logo" width="60px" />
                 </a>
                 <span className="navbar-burger burger" data-target="navbarMenuHeroC">
                   <span></span>
@@ -23,12 +23,6 @@ const App = () => {
                 <div className="navbar-end">
                   <a className="navbar-item" href="#apiSection">
                     Docs
-                  </a>
-                  <a className="navbar-item" href="https://www.npmjs.com/package/react-useformless">
-                    <div className="tags has-addons">
-                      <span className="tag is-dark">npm</span>
-                      <span className="tag is-info">1.2</span>
-                    </div>
                   </a>
                   <span className="navbar-item">
                     <a className="button is-dark is-inverted" href="https://github.com/GeDiez/react-use-formless">
@@ -48,9 +42,19 @@ const App = () => {
             <p className="title">
               <img src="logo-useformless.png" alt="Logo" width="230px" />
             </p>
-            <p className="subtitle">
-              useFormless is a custom hook, focused to create simple and fast forms
-            </p>
+            <div className="subtitle">
+              <div className="columns is-centered is-8">
+                <div className="column is-one-fifth">
+                  <img src="https://badgen.net/bundlephobia/minzip/react-useformless?color=red" alt="npm version"/>
+                </div>
+                <div className="column is-one-fifth">
+                  <img src="https://badgen.net/npm/v/react-useformless" alt="npm version"/>
+                </div>
+                <div className="column is-one-fifth">
+                  <img src="https://travis-ci.org/GeDiez/react-use-formless.svg?branch=master" alt="npm version"/>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div className="hero-foot">

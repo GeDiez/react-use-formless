@@ -10,6 +10,13 @@
 [![Build Status](https://travis-ci.org/GeDiez/react-use-formless.svg?branch=master)](https://travis-ci.org/GeDiez/react-use-formless)
 [![styled with standard](https://img.shields.io/badge/styled_with-standard-ff69b4.svg)](https://github.com/standard/standard)
 
+
+Why useFormless?
+
+- Works with nested forms 🎉
+- Zero dependencies 🆓
+- Includes helpers for field and form tags, it makes a easy for use
+
 # Getting Started
 
 ## Step 1: Install it
@@ -53,12 +60,12 @@ useFormless accepts an optional object that lets you add validations handlers
    const errorFn = validators[name]
    return errorFn(value)
  },
- onError: (ev: DOMEvent) => {
+ onError: (ev: DOMEvent, { values, errors }) => {
    ev.preventDefault()
    // If you decide using onSubmit function provided by formless, this function will be fired after the submit error
    // It receives DOMevent so you do whatever you want after it ends
  },
- onSuccess: (ev: DOMEvent) => {
+ onSuccess: (ev: DOMEvent, { values }) => {
    ev.preventDefault()
    //Same as error option, but this one is fired on success
  }

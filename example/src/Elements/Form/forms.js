@@ -20,7 +20,6 @@ export function Input({ field, type, label= '' }) {
     <BaseInput label={label} field={field}>
       <input className={classnames("input" ,{'is-danger': field.shouldShowError()})}  type={type} {...field.props()}/>
     </BaseInput>
-
   )
 }
 
@@ -29,7 +28,6 @@ export function Textarea({ field, type, label= '' }) {
     <BaseInput label={label}  field={field}>
       <textarea className={classnames("textarea" ,{'is-danger': field.shouldShowError()})} {...field.props()} placeholder="tell us something interesting about you ^^" cols="80" rows="10"/>
     </BaseInput>
-
   )
 }
 
@@ -40,7 +38,6 @@ export function Select({ field, type, children, label= '' }) {
         {children}
       </select>
     </BaseInput>
-
   )
 }
 
