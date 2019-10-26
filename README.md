@@ -95,7 +95,7 @@ return(
 )
 ```
 
-> If you prefer it, get started 🎮 with this snippet in [CodeSandbox](https://codesandbox.io/s/m7z683235j)
+> if you prefer it, get started 🎮 with this snippet in [CodeSandbox](https://codesandbox.io/s/vyw7k42o87)
 
 # Prerequisites
 

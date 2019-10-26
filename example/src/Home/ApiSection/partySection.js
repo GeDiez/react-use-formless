@@ -5,28 +5,26 @@ import { Code as Highlight } from "../../shared/components";
 export function PartySection(props) {
   return (
     <>
-      <h2 className="title is-2">party:object</h2>
-      <p>party function allow you create nested forms into your main form returned by useFormless hook, party.create function will create a new object into your values. `The party.create()` works similary to useFormless hook, it means, you can handle all information inside a nested form with the same API</p>
+      <h2 className="title is-2">party:function</h2>
+      <p>you can get another nested forms by using this function, it returns the same functions as useFormless hook does</p>
+      <p>Use party recursively in order to create complex structures of data</p>
       <Highlight language="js">
 {`
 const { party } = useFormless(options)
 // sign of function
-party: object
-//{
-//  create,
-    isValid,
-    reset,
-    validate,
-// }
+const {
+  field,
+  form,
+  party,
+  resetParty,
+  validateParty,
+  isValidParty
+  ...
+} = party('party_name', options)
 `}
       </Highlight>
-      <strong>It is an object</strong>
-      <ul>
-        <li><strong>create(nameParty, options)</strong> create multiples forms, it has the same API than use fomrles hook </li>
-        <li><strong>isValid(): boolean</strong> run valdiations and will return true if they pass</li>
-        <li><strong>validate()</strong> will validate the full party, even their nested forms</li>
-        <li><strong>reset()</strong> reset party to initial state including nested forms</li>
-      </ul>
+      <strong>options</strong>
+      <p><code>{` {validate: validatePartyFunction} `}</code></p>
     </>
   );
 }

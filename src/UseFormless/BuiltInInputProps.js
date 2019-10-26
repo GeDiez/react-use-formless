@@ -19,10 +19,9 @@ const builtInInputProps = (handlers, options, taskerValidations) => {
     }
 
     return {
-      name,
+      ...inputProps(name, !!initialValue),
       checked: handlers.getValue(name),
       onChange: () => handlers.setValue(name, !handlers.getValue(name)),
-      onBlur: () => handlers.validateField(name),
       type: 'checkbox'
     }
   }

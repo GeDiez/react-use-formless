@@ -13,6 +13,13 @@ const { field } = useFormless(options)
 // or
 // const { field } = party.create(options)
 
+// use
+
+return <form ...>
+    <input type="text" {...field('fullname', 'initial name')} />
+    <input type="text" {...field('other_field', 'initial value')} />
+</form>
+
 //{
 //   name,
 //   props: () => inputProps(name, initialValue),

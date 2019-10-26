@@ -32,7 +32,6 @@ const { values, touched, errors } = useFormless();
           * party function adds a new object inside these states to treat with nested data
         </i>
       </div>
-      <h3 className="title is-4"></h3>
     </>
   )
 }

@@ -3,7 +3,7 @@ import React from 'react';
 import { InputIcon, Input } from "../Elements";
 
 export const ProfileForm = ({ party }) => {
-  const profile = party.create(
+  const profile = party(
     'Profile',
     {
       validate: (name, value, { values }) => {
