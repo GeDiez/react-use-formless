@@ -7,7 +7,7 @@ export const AddressForm = ({ party }) => {
   const validate = (name, value) => value === '' ? 'Is required' : ''
 
   // create our party form with the key Address
-  const addressForm = party.create('Address', { validate })
+  const addressForm = party('Address', { validate })
 
   return (
     <>
@@ -19,6 +19,8 @@ export const AddressForm = ({ party }) => {
         <option value="GDL">Guadalajara</option>
         <option value="OAX">OAXACA</option>
       </Select>
+      <button type="button" onClick={addressForm.resetParty}>reset only address section</button>
+      <button type="button" onClick={addressForm.validateParty}>validate only address section</button>
     </>
   )
 }

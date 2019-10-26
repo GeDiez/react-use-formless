@@ -13,11 +13,18 @@ const { field } = useFormless(options)
 // or
 // const { field } = party.create(options)
 
+// use
+
+return <form ...>
+    <input type="text" {...field('fullname', 'initial name')} />
+    <input type="text" {...field('other_field', 'initial value')} />
+</form>
+
 //{
 //   name,
 //   props: () => inputProps(name, initialValue),
 //   checkboxProps: () => inputCheckboxProps(name, initialValue),
-//   isValid: () => handlers.isValidField(name),
+//   shouldShowError: () => handlers.isValidField(name),
 //   getValue: () => handlers.getValue(name),
 //   setValue: value => handlers.setValue(name, value),
 //   getError: () => handlers.getError(name),
@@ -36,7 +43,7 @@ const { field } = useFormless(options)
       <ul>
         <li><strong>props()</strong> is the same that inputPropsField function</li>
         <li><strong>checkboxProps()</strong> is the same that inputCheckboxProps function</li>
-        <li><strong>isValid()</strong> verify if this field is valid</li>
+        <li><strong>shouldShowError()</strong> allow you know if a error must be shown</li>
         <li><strong>getValue()</strong> gets value of field</li>
         <li><strong>setValue()</strong> set value of field</li>
         <li><strong>getError()</strong> gets the error for the field</li>

@@ -15,26 +15,21 @@ const createParty = (Dformless, IStore, options) => {
     const handlers = builtInHandlersForForm(Dformless, IStore, newPath, options, taskerValidations)
     const reactFormProps = builtInInputProps(handlers, options, taskerValidations)
 
-    function create(name, partyOptions = { validate: () => '' }) {
-      return createParty(Dformless, IStore, { ...partyOptions, initialValues: options.initialValues })(name, newPath, taskerValidations)
-    }
-
-    const party = {
-      create,
-      isValid: handlers.isValidParty,
-      validate: handlers.isValidParty,
-      reset: handlers.resetParty
-    }
-
     return ({
       values,
       touched,
       errors,
       ...handlers,
       ...reactFormProps,
-      party
-      // party: (name, partyOptions = { validate: () => '' }) =>
-      //   createParty(Dformless, IStore, { ...partyOptions, initialValues: options.initialValues })(name, newPath, taskerValidations)
+      party: function create(name, partyOptions = { validate: () => '' }) {
+        return createParty(
+          Dformless,
+          IStore,
+          {
+            ...partyOptions,
+            initialValues: options.initialValues
+          })(name, newPath, taskerValidations)
+      }
     })
   }
 }

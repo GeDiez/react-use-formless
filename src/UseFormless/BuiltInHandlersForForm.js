@@ -111,7 +111,7 @@ const builtInHandlersForForm = (Dformless, IStore, path, options, taskerValidati
     setErrors(errors)
   }
 
-  const isValidField = (name) =>
+  const shouldShowError = (name) =>
     Dformless.isTouched(IStore.touched, { path, name }) && getError(name) !== ''
 
   const isValidParty = () => Dformless.isValidParty(IStore.errors, { path })
@@ -127,7 +127,7 @@ const builtInHandlersForForm = (Dformless, IStore, path, options, taskerValidati
     getErrors,
     setError,
     setErrors,
-    isValidField,
+    shouldShowError,
     initField,
     setField,
     touchField,
